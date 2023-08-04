@@ -78,6 +78,10 @@ flutter:
       fonts:
         - asset: asstes/font/KCC-Chassam.ttf
           style: normal
+    - family: Pretendard-Light
+      fonts:
+        - asset: asstes/font/Pretendard-Light.ttf
+          style: normal
 
   #
   # For details regarding fonts from package dependencies,
