@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:suwon/screens/login.dart';
+import 'package:suwon/screens/setprofile.dart';
 import 'package:suwon/widgets/csbutton.dart';
+import 'package:suwon/widgets/emailfield.dart';
+import 'package:suwon/widgets/inputtext.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -19,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   bool _PwError = false;
   bool _EmailError = false;
   bool _PwMatch = false;
+  bool _isEmailValid = true;
   bool _passwordVisible1 = false;
   bool _passwordVisible2 = false;
   final IdCheckbtcolor = const Color(0xFF2D64D8);
@@ -78,7 +82,6 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
-  bool _isEmailValid = true;
   bool _validateEmail(String value) {
     // 이메일 유효성 검사를 위한 정규표현식 사용
     final RegExp emailRegExp =
@@ -136,45 +139,16 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(
                           height: 38,
                         ),
-                        Row(
-                          //ID 입력폼
-                          children: [
-                            Text(
-                              '  아이디',
-                              style: TextStyle(
-                                  fontFamily: 'Pretendard-Light',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            if (_IdError)
-                              Text(
-                                '*4자 이상 16자 이내로 작성해 주세요',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 58,
-                          child: TextFormField(
-                            controller: _idController,
-                            onChanged: _valiIdInput,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              labelStyle: TextStyle(
-                                  fontFamily: 'Pretendard-Light', fontSize: 14),
-                              hintText: '아이디 입력 (4~16자)',
-                            ),
-                          ),
+                        InputTextFD(
+                          controller: _idController,
+                          onChanged: _valiIdInput,
+                          hintText: '아이디 입력 (4~16자)',
+                          title: '  아이디',
+                          Error: _IdError,
+                          ErrorText: '* 4자 이상 16자 이내로 작성해 주세요',
                         ),
                         Transform.translate(
-                          offset: Offset(248, -51),
+                          offset: Offset(248, -52),
                           child: Container(
                             height: 44,
                             width: 110,
@@ -222,10 +196,11 @@ class _SignUpState extends State<SignUp> {
                           height: 10,
                         ),
                         SizedBox(
-                          height: 58,
+                          height: 60,
                           child: TextFormField(
                             obscureText: !_passwordVisible1,
                             controller: _pwController,
+                            onChanged: _valiPwInput,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -277,7 +252,7 @@ class _SignUpState extends State<SignUp> {
                           height: 10,
                         ),
                         SizedBox(
-                          height: 58,
+                          height: 60,
                           child: TextFormField(
                             obscureText: !_passwordVisible2,
                             controller: _pwmatchController,
@@ -318,37 +293,13 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                width: 2,
-                                color: Color(0xFFBFBFBF),
-                              ),
-                            ),
-                          ),
-                          child: TextFormField(
-                            maxLength: 20,
-                            controller: _emailController,
-                            onChanged: (value) {
-                              setState(() {
-                                _isEmailValid = _validateEmail(value);
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                fontFamily: 'Pretendard-Light',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF989898),
-                              ),
-                              hintText: '  포털 이메일 입력',
-                              counterText:
-                                  '', // 입력 길이 카운터 텍스트를 빈 문자열로 설정하여 표시하지 않음
-                              errorStyle:
-                                  TextStyle(height: 0), // 에러 메시지 표시 공간을 없앰
-                            ),
-                          ),
+                        EmailFD(
+                          controller: _emailController,
+                          onChanged: (value) {
+                            setState(() {
+                              _isEmailValid = _validateEmail(value);
+                            });
+                          },
                         ),
                         SizedBox(height: 10),
                         if (!_isEmailValid)
@@ -362,7 +313,13 @@ class _SignUpState extends State<SignUp> {
                         CustomButton(
                             text: '회원가입',
                             backgroundColor: Colors.black,
-                            onPressed: () {}),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SetProfile()),
+                              );
+                            }),
                         SizedBox(
                           height: 10,
                         ),
