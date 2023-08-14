@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suwon/screens/signup.dart';
+import 'package:suwon/widgets/csbutton.dart';
 
 class MainLogin extends StatefulWidget {
   const MainLogin({super.key});
@@ -96,24 +97,14 @@ class _MainLoginState extends State<MainLogin> {
               child: Column(
                 children: [
                   Container(
-                      //로그인 버튼
-                      height: 70,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: loginbtcolor),
-                      margin: EdgeInsets.symmetric(horizontal: 40),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "로그인",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w800,
-                              fontFamily: 'Pretendard-Light'),
-                        ),
-                      )),
+                    //로그인 버튼
+
+                    margin: EdgeInsets.symmetric(horizontal: 40),
+                    child: CustomButton(
+                        text: '로그인',
+                        backgroundColor: Color(0xFF2D64D8),
+                        onPressed: () {}),
+                  ),
                   Container(
                     //아이디 비번 찾기
                     margin: EdgeInsets.symmetric(horizontal: 32),
@@ -183,30 +174,19 @@ class _MainLoginState extends State<MainLogin> {
                         ],
                       )),
                   Container(
-                      //로그인 버튼
-                      height: 70,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.black),
-                      margin: EdgeInsets.only(left: 40, right: 40, top: 20),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          );
-                        },
-                        child: Text(
-                          "회원가입",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: 'Pretendard-Light',
-                          ),
-                        ),
-                      )),
+                    //로그인 버튼
+                    margin: EdgeInsets.only(left: 40, right: 40, top: 20),
+                    child: CustomButton(
+                      text: '회원가입',
+                      backgroundColor: Colors.black,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUp()),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
