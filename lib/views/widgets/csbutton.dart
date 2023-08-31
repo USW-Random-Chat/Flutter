@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -14,10 +15,10 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 64,
+      height: 60.h,
       width: double.maxFinite,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         color: backgroundColor,
       ),
       child: TextButton(
@@ -26,9 +27,9 @@ class CustomButton extends StatelessWidget {
           text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 22,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w800,
-            fontFamily: 'Pretendard-Light',
+            fontFamily: 'Pretendard-Bold',
           ),
         ),
       ),
