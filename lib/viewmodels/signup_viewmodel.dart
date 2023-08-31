@@ -5,6 +5,7 @@ class SignupViewModel extends ChangeNotifier {
   String _password = '';
   String _email = '';
 
+
   bool _idError = false;
   bool _pwError = false;
   bool _emailError = false;
@@ -15,6 +16,7 @@ class SignupViewModel extends ChangeNotifier {
   TextEditingController pwController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController pwMatchController = TextEditingController();
+
 
   bool get idError => _idError;
   bool get pwError => _pwError;
