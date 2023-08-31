@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:suwon/screens/login.dart';
-import 'package:suwon/screens/setprofile.dart';
-import 'package:suwon/widgets/csbutton.dart';
-import 'package:suwon/widgets/emailfield.dart';
-import 'package:suwon/widgets/inputtext.dart';
+import 'package:suwon/views/login_screen.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+import 'package:suwon/views/widgets/appbar.dart';
+import 'package:suwon/views/widgets/csbutton.dart';
+import 'package:suwon/views/widgets/emailfield.dart';
+
+class SignUpa extends StatefulWidget {
+  const SignUpa({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpa> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUpa> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
@@ -100,37 +100,15 @@ class _SignUpState extends State<SignUp> {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(
-                    //상단 회원가입+뒤로가기 버튼
-                    width: double.maxFinite,
-                    height: 60,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainLogin()),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_outlined,
-                              size: 28,
-                            )),
-                        SizedBox(
-                          width: 102,
-                        ),
-                        Text(
-                          '회원가입',
-                          style: TextStyle(
-                              fontFamily: 'Pretendard-Light',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
+                  SuchatAppBar(
+                    text: '회원가입',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NewLoignMain()),
+                      );
+                    },
                   ),
                   Flexible(
                     child: Column(
@@ -138,14 +116,6 @@ class _SignUpState extends State<SignUp> {
                       children: [
                         SizedBox(
                           height: 38,
-                        ),
-                        InputTextFD(
-                          controller: _idController,
-                          onChanged: _valiIdInput,
-                          hintText: '아이디 입력 (4~16자)',
-                          title: '  아이디',
-                          Error: _IdError,
-                          ErrorText: '* 4자 이상 16자 이내로 작성해 주세요',
                         ),
                         Transform.translate(
                           offset: Offset(248, -52),
@@ -283,16 +253,6 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(
                           height: 30,
                         ),
-                        Transform.translate(
-                          offset: Offset(225, 33),
-                          child: Text(
-                            "@ suwon.ac.kr",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
                         EmailFD(
                           controller: _emailController,
                           onChanged: (value) {
@@ -313,13 +273,7 @@ class _SignUpState extends State<SignUp> {
                         CustomButton(
                             text: '회원가입',
                             backgroundColor: Colors.black,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SetProfile()),
-                              );
-                            }),
+                            onPressed: () {}),
                         SizedBox(
                           height: 10,
                         ),
