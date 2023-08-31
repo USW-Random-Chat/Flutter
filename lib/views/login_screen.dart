@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/Login_page_searchID.dart';
 import 'package:suwon/views/Signup_creen.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/login_viewmodel.dart';
 import 'package:suwon/views/widgets/font.dart';
+
+import 'Login_page_searchPW.dart';
 
 class NewLoignMain extends StatelessWidget {
   const NewLoignMain({super.key});
@@ -64,7 +67,13 @@ class NewLoignMain extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SearchID()),
+                            );
+                          },
                           child: TextFont.fontRegular(
                               text: '아이디 찾기',
                               fontSize: 14.sp,
@@ -72,7 +81,13 @@ class NewLoignMain extends StatelessWidget {
                       TextFont.fontRegular(
                           text: '/', fontSize: 16.sp, color: Color(0xFFBFBFBF)),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SearchPW()),
+                            );
+                          },
                           child: TextFont.fontRegular(
                               text: '비밀번호 찾기',
                               fontSize: 14.sp,
