@@ -5,14 +5,14 @@ import 'package:suwon/views/widgets/appbar.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/widgets/emailfield.dart';
 
-class SignUpa extends StatefulWidget {
-  const SignUpa({super.key});
+class SetProfile extends StatefulWidget {
+  const SetProfile({super.key});
 
   @override
-  State<SignUpa> createState() => _SignUpState();
+  State<SetProfile> createState() => _SetProfile();
 }
 
-class _SignUpState extends State<SignUpa> {
+class _SetProfile extends State<SetProfile> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _idController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
