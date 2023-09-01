@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/views/setprofile.dart';
 import 'package:suwon/views/widgets/appbar.dart';
 import 'package:suwon/viewmodels/signup_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/widgets/emailfield.dart';
+import 'package:suwon/views/widgets/font.dart';
 
 class SignupScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -35,7 +38,8 @@ class SignupScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const NewLoignMain()),
+                            builder: (context) => NewLoignMain(),
+                          ),
                         );
                       },
                     ),
@@ -87,7 +91,61 @@ class SignupScreen extends StatelessWidget {
                             EmailFD(
                                 controller: signupViewModel.emailController,
                                 onChanged: (value) =>
-                                    signupViewModel.isEmailValid)
+                                    signupViewModel.isEmailValid),
+                            SizedBox(height: 57.h),
+                            CustomButton(
+                                text: '회원가입',
+                                backgroundColor: Color(0xFF111111),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SetProfile()),
+                                  );
+                                }),
+                            SizedBox(
+                              height: 14.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextFont.fontSemiBold(
+                                  text: '회원가입 시 ',
+                                  fontSize: 12.sp,
+                                  color: Color(0xFF989898),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // 버튼이 클릭되었을 때 실행될 코드
+                                  },
+                                  child: TextFont.fontSemiBold(
+                                    text: '서비스 이용약관',
+                                    fontSize: 12.sp,
+                                    color: Color(0xFF2D64D8),
+                                  ),
+                                ),
+                                TextFont.fontSemiBold(
+                                  text: ' 및 ',
+                                  fontSize: 12.sp,
+                                  color: Color(0xFF989898),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // 버튼이 클릭되었을 때 실행될 코드
+                                  },
+                                  child: TextFont.fontSemiBold(
+                                    text: '개인정보 처리방침',
+                                    fontSize: 12.sp,
+                                    color: Color(0xFF2D64D8),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TextFont.fontSemiBold(
+                              text: '하신 것으로 간주됩니다',
+                              fontSize: 12.sp,
+                              color: Color(0xFF989898),
+                            ),
                           ],
                         ),
                       ),
@@ -142,13 +200,19 @@ class IdInputFD extends StatelessWidget {
                 fontSize: 14.sp,
               ),
               hintText: '아이디 입력 (4~16자)',
+              contentPadding:
+                  EdgeInsets.only(top: 10, bottom: 17, left: 10, right: 10),
               suffix: Container(
-                width: 51.w,
-                height: 16.h,
+                width: 100.w,
+                height: 38.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: Color(0xFF2D64D8),
                 ),
+                child: TextButton(
+                    onPressed: () {},
+                    child: TextFont.fontRegular(
+                        color: Color(0xFFFFFFFF), fontSize: 14, text: '중복 확인')),
               ),
             ),
           ),
@@ -221,6 +285,8 @@ class PwInputFD extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 hintText: hintText,
+                contentPadding:
+                    EdgeInsets.only(top: 10, bottom: 17, left: 10, right: 10),
                 suffixIcon: IconButton(
                   icon: Icon(icon),
                   onPressed: onPressed,
