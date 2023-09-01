@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/Login_page_changePW.dart';
 import 'package:suwon/views/Login_page_searchID.dart';
 import 'package:suwon/views/Signup_creen.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
@@ -85,7 +86,7 @@ class NewLoignMain extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SearchPW()),
+                                  builder: (context) => SearchPW()),
                             );
                           },
                           child: TextFont.fontRegular(

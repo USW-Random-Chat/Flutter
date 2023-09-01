@@ -28,6 +28,10 @@ class SignupScreen extends StatelessWidget {
                     child: SuchatAppBar(
                       text: ' 회원가입',
                       onPressed: () {
+                        signupViewModel.idController.clear();
+                        signupViewModel.pwController.clear();
+                        signupViewModel.pwMatchController.clear();
+                        signupViewModel.emailController.clear();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -70,7 +74,7 @@ class SignupScreen extends StatelessWidget {
                               obscureText: signupViewModel.passwordVisible2,
                               controller: signupViewModel.pwMatchController,
                               onChanged: (value) =>
-                                  signupViewModel.validatePwInput(value),
+                                  signupViewModel.validatePwMatch(value),
                               hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
                               onPressed: () {
                                 signupViewModel.togglePasswordVisibility2();

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SignupViewModel extends ChangeNotifier {
+class AccountRecoveryViewModel extends ChangeNotifier {
   String _id = '';
   String _password = '';
   String _email = '';
+  String _validationCode = '';
 
 
   bool _idError = false;
@@ -11,11 +12,13 @@ class SignupViewModel extends ChangeNotifier {
   bool _emailError = false;
   bool _pwMatch = false;
   bool _isEmailValid = true;
+  bool _isValidationCodeError = false;
 
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController pwMatchController = TextEditingController();
+  TextEditingController ValidationCodeController = TextEditingController();
 
 
   bool get idError => _idError;
@@ -48,11 +51,19 @@ class SignupViewModel extends ChangeNotifier {
 
   void validatePwMatch(String value) {
     if (pwController.text != value) {
-      _pwMatch = true;
-    } else {
       _pwMatch = false;
+    } else {
+      _pwMatch = true;
     }
     notifyListeners();
+  }
+
+  void validateCodeMatch(String value) {
+    if (ValidationCodeController.text != value) {
+      _isValidationCodeError = true;
+    } else {
+      _isValidationCodeError = false;
+    }
   }
 
   void togglePasswordVisibility1() {
@@ -67,23 +78,32 @@ class SignupViewModel extends ChangeNotifier {
 
   bool validateEmail(String value) {
     final RegExp emailRegExp =
-        RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
     _isEmailValid = emailRegExp.hasMatch(value);
     notifyListeners();
     return _isEmailValid;
   }
 
-  Future<void> signup() async {
-    if (validateEmail(_email) && !_idError && !_pwError && _pwMatch) {
-      // 회원가입 로직을 여기에 구현하면 됩니다.
-      // 예: API 호출, 데이터 저장 등
-      String id = _id;
-      String password = _password;
+  Future<void> Search_ID() async {
+    if (validateEmail(_email)) {
+      // 이메일 전송 로직
+      //
       String email = _email;
+      print('eamil: $email');
+
+    }
+  }
+  Future<void> Search_PW() async {
+    if(validateEmail(_email)&& !_idError) {
+      // 이메일 및 ID 검증
+      // 인증코드 전송 및 검증
+      String id = _id;
+      String email = _email;
+      String validationCode = _validationCode;
 
       print('id: $id');
-      print('Password: $password');
       print('email: $email');
+      print('validationCode = $validationCode');
     }
   }
 }

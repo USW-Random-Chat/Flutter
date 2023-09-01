@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
 import 'package:suwon/viewmodels/signup_viewmodel.dart';
 import 'package:suwon/views/login_screen.dart';
 import 'package:suwon/views/widgets/appbar.dart';
@@ -16,7 +17,7 @@ class SearchID extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryViewModel>(context);
 
     return ScreenUtilInit(
       designSize: Size(390, 844),
@@ -34,6 +35,8 @@ class SearchID extends StatelessWidget {
                   child: SuchatAppBar(
                     text: '아이디 찾기',
                     onPressed: (){
+
+                      accountRecoveryViewModel.emailController.clear();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -51,8 +54,8 @@ class SearchID extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(height: 42.h,),
-                          EmailFD(controller: signupViewModel.emailController, onChanged: (value) =>
-                          signupViewModel.isEmailValid),
+                          EmailFD(controller: accountRecoveryViewModel.emailController, onChanged: (value) =>
+                          accountRecoveryViewModel.isEmailValid),
                           SizedBox(height: 60.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
