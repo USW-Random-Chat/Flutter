@@ -2,22 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
 import 'package:suwon/views/login_screen.dart';
 import 'package:suwon/views/widgets/appbar.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/widgets/emailfield.dart';
-import 'package:suwon/viewmodels/login_viewmodel.dart';
+import 'package:suwon/views/widgets/idfield.dart';
 
 class SearchPW extends StatelessWidget {
-  const SearchPW({super.key});
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  SearchPW({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
-    final loginViewModel = Provider.of<LoginViewModel>(context);
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryViewModel>(context);
+
 
 
     return ScreenUtilInit(
@@ -34,6 +35,9 @@ class SearchPW extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 20.w),
                     child: SuchatAppBar(
                       text: '비밀번호 찾기', onPressed: () {
+                        accountRecoveryViewModel.idController.clear();
+                        accountRecoveryViewModel.emailController.clear();
+                        accountRecoveryViewModel.ValidationCodeController.clear();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -48,11 +52,11 @@ class SearchPW extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(height: 42.h,),
-                        EmailFD(controller: signupViewModel.emailController, onChanged: (value) =>
-                        signupViewModel.isEmailValid), //ID_field 수정 필요
+                        IdFD(controller: accountRecoveryViewModel.idController, onChanged: (value) =>
+                        accountRecoveryViewModel.idError), //ID_field 수정 필요
                         SizedBox(height: 21.h,),
-                        EmailFD(controller: signupViewModel.emailController, onChanged: (value) =>
-                        signupViewModel.isEmailValid),
+                        EmailFD(controller: accountRecoveryViewModel.emailController, onChanged: (value) =>
+                        accountRecoveryViewModel.isEmailValid),
                         SizedBox(height: 60.h,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +92,7 @@ class SearchPW extends StatelessWidget {
                         CustomButton(text: '인증코드 전송', backgroundColor: Color(0xff2D64D8), onPressed: (){},),
                         SizedBox(height: 24.h,),
                         InputCode(onChanged: (value) =>
-                        signupViewModel.isEmailValid, hintText: '인증코드 4자리 입력' ), //onChanged 변경 필요
+                        accountRecoveryViewModel.isEmailValid, hintText: '인증코드 4자리 입력' ), //onChanged 변경 필요
 
 
 
@@ -120,12 +124,31 @@ class SearchPW extends StatelessWidget {
            borderRadius: BorderRadius.circular(10),
          ),
          labelStyle: TextStyle(
-           fontFamily: 'Pretendard-Regular',
+           fontFamily: 'Pretendard',
            fontSize: 14.sp,
          ),
          hintText: hintText,
+         suffix: ElevatedButton(style:
+           ElevatedButton.styleFrom(
+             backgroundColor: Color(0xff2D64D8),
+             shape: RoundedRectangleBorder(
+               borderRadius: BorderRadius.circular(12.sp)
+             ),
+             fixedSize: Size(70.sp, 38.sp)
+           ),onPressed: (){},
+             child: Text('확인',
+               style: TextStyle(
+                 color: Colors.white,
+                 fontFamily: 'Pretendard',
+                 fontSize: 14.sp,
+                 fontWeight: FontWeight.w600,
+                 letterSpacing: -0.35.sp,
+               ),
+             ),
+         )
        ),
      ),
+
    );
  }
 }
