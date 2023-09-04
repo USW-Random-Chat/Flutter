@@ -20,7 +20,7 @@ class SignupScreen extends StatelessWidget {
       builder: (context, child) => Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
-            margin: EdgeInsets.only(top: 70.h),
+            margin: EdgeInsets.only(top: 88.h),
             child: Form(
               key: _formKey,
               child: Column(

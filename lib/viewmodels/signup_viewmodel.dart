@@ -4,17 +4,24 @@ class SignupViewModel extends ChangeNotifier {
   String _id = '';
   String _password = '';
   String _email = '';
+  String _nickname = '';
+  String _mbti = '';
+  String _self = ''; //자기소개
 
   bool _idError = false;
   bool _pwError = false;
   bool _emailError = false;
   bool _pwMatch = false;
   bool _isEmailValid = true;
+  bool _nicknameError = false;
 
   TextEditingController idController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController pwMatchController = TextEditingController();
+  TextEditingController nicknameController = TextEditingController();
+  TextEditingController mbtiController = TextEditingController();
+  TextEditingController selfController = TextEditingController();
 
   bool get idError => _idError;
   bool get pwError => _pwError;
@@ -25,6 +32,7 @@ class SignupViewModel extends ChangeNotifier {
   bool get passwordVisible1 => _passwordVisible1;
   bool _passwordVisible2 = true;
   bool get passwordVisible2 => _passwordVisible2;
+  bool get nicknameError => _nicknameError;
 
   void validateIdInput(String value) {
     if (value.length >= 4 && value.length <= 16) {
@@ -49,6 +57,15 @@ class SignupViewModel extends ChangeNotifier {
       _pwMatch = true;
     } else {
       _pwMatch = false;
+    }
+    notifyListeners();
+  }
+
+  void validateNickName(String value) {
+    if (value.length < 9) {
+      _nicknameError = false;
+    } else {
+      _nicknameError = true;
     }
     notifyListeners();
   }
