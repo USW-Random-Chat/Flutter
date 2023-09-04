@@ -1,310 +1,270 @@
 import 'package:flutter/material.dart';
-import 'package:suwon/views/login_screen.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/signup_creen.dart';
 import 'package:suwon/views/widgets/appbar.dart';
+import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/emailfield.dart';
+import 'package:suwon/views/widgets/font.dart';
 
-class SetProfile extends StatefulWidget {
-  const SetProfile({super.key});
-
-  @override
-  State<SetProfile> createState() => _SetProfile();
-}
-
-class _SetProfile extends State<SetProfile> {
+class SetProfile extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _idController = TextEditingController();
-  TextEditingController _pwController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _pwmatchController = TextEditingController();
-  bool _IdError = false;
-  bool _PwError = false;
-  bool _EmailError = false;
-  bool _PwMatch = false;
-  bool _isEmailValid = true;
-  bool _passwordVisible1 = false;
-  bool _passwordVisible2 = false;
-  final IdCheckbtcolor = const Color(0xFF2D64D8);
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // 회원가입 로직을 여기에 구현하면 됩니다.
-      // 예: API 호출, 데이터 저장 등
-      String id = _idController.text;
-      String password = _pwController.text;
-      String email = _emailController.text;
-      String pwmatch = _pwmatchController.text;
-
-      print('id: $id');
-      print('Password: $password');
-      print('email: $email');
-      print('pw: $pwmatch');
-    }
-  }
-
-  // id 4자 이상 16자 이하
-  void _valiIdInput(String value) {
-    if (value.length >= 4 && value.length <= 16) {
-      setState(() {
-        _IdError = false;
-      });
-    } else {
-      setState(() {
-        _IdError = true;
-      });
-    }
-  }
-
-  //pw 6자 이상 20자 이하
-  void _valiPwInput(String value) {
-    if (value.length >= 6 && value.length <= 20) {
-      setState(() {
-        _PwError = false;
-      });
-    } else {
-      setState(() {
-        _PwError = true;
-      });
-    }
-  }
-
-  void _valiPwMatch(String value) {
-    // ignore: unrelated_type_equality_checks
-    if (_pwController.text != value) {
-      setState(() {
-        _PwMatch = false;
-      });
-    } else {
-      setState(() {
-        _PwMatch = true;
-      });
-    }
-  }
-
-  bool _validateEmail(String value) {
-    // 이메일 유효성 검사를 위한 정규표현식 사용
-    final RegExp emailRegExp =
-        RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-    return emailRegExp.hasMatch(value);
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    final signupViewModel = Provider.of<SignupViewModel>(context);
+    return ScreenUtilInit(
+      designSize: Size(390, 844),
+      builder: (context, child) => Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
-            margin: EdgeInsets.only(left: 33, right: 33, top: 70),
+            margin: EdgeInsets.only(top: 88.h),
             child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  SuchatAppBar(
-                    text: '회원가입',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const NewLoignMain()),
-                      );
-                    },
-                  ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 38,
-                        ),
-                        Transform.translate(
-                          offset: Offset(248, -52),
-                          child: Container(
-                            height: 44,
-                            width: 110,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: IdCheckbtcolor,
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                '중복확인',
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard-Light',
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                  Container(
+                    //상단바
+                    margin: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: SuchatAppBar(
+                      text: ' 프로필 설정',
+                      onPressed: () {
+                        signupViewModel.idController.clear();
+                        signupViewModel.pwController.clear();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupScreen(),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          //PW 입력폼
-                          children: [
-                            Text(
-                              '  비밀번호',
-                              style: TextStyle(
-                                  fontFamily: 'Pretendard-Light',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            if (_PwError)
-                              Text(
-                                '* 6자 이상 20자 이내로 작성해 주세요',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 60,
-                          child: TextFormField(
-                            obscureText: !_passwordVisible1,
-                            controller: _pwController,
-                            onChanged: _valiPwInput,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              labelStyle: TextStyle(
-                                fontFamily: 'Pretendard-Light',
-                                fontSize: 14,
-                              ),
-                              hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _passwordVisible1
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _passwordVisible1 = !_passwordVisible1;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 18,
-                        ),
-                        Row(
-                          //PW 입력폼
-                          children: [
-                            Text(
-                              '  비밀번호 확인',
-                              style: TextStyle(
-                                  fontFamily: 'Pretendard-Light',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            if (_pwController.text != _pwmatchController.text)
-                              Text(
-                                '* 비밀번호가 일치하지 않습니다.',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 60,
-                          child: TextFormField(
-                            obscureText: !_passwordVisible2,
-                            controller: _pwmatchController,
-                            onChanged: _valiPwMatch,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              labelStyle: TextStyle(
-                                fontFamily: 'Pretendard-Light',
-                                fontSize: 14,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _passwordVisible2
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _passwordVisible2 = !_passwordVisible2;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        EmailFD(
-                          controller: _emailController,
-                          onChanged: (value) {
-                            setState(() {
-                              _isEmailValid = _validateEmail(value);
-                            });
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        if (!_isEmailValid)
-                          Text(
-                            '* 이메일 형식이 올바르지 않습니다',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        SizedBox(
-                          height: 45,
-                        ),
-                        CustomButton(
-                            text: '회원가입',
-                            backgroundColor: Colors.black,
-                            onPressed: () {}),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          child: Center(
-                              child: Column(
-                            children: [
-                              Text(
-                                '회원가입 시 서비스 이용약관 및 개인정보 처리방침에 동의',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard-Light',
-                                    fontSize: 13),
-                              ),
-                              Text(
-                                '하신 것으로 간주됩니다',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Pretendard-Light',
-                                    fontSize: 13),
-                              ),
-                            ],
-                          )),
-                        )
-                      ],
+                        );
+                      },
                     ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 32.w),
+                    child: Column(children: [
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InputFD(
+                              labelText: '닉네임',
+                              text: ' (필수)',
+                              color: Color(0xFFFF0000),
+                              controller: signupViewModel.nicknameController,
+                              onChanged: (value) =>
+                                  signupViewModel.validateNickName(value),
+                              showErrorText: signupViewModel.nicknameError,
+                              errorText: '* 닉네임은 8자 이내로 작성 해주세요',
+                              hintText: '# NICKNAME',
+                              height: 50.h,
+                              suffix: Container(
+                                width: 100.w,
+                                height: 38.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Color(0xFF2D64D8),
+                                ),
+                                child: TextButton(
+                                    onPressed: () {},
+                                    child: TextFont.fontRegular(
+                                        color: Color(0xFFFFFFFF),
+                                        fontSize: 14,
+                                        text: '중복 확인')),
+                              ),
+                            ),
+                            SizedBox(height: 25.h),
+                            InputFD(
+                                labelText: 'MBTI',
+                                text: ' (선택)',
+                                color: Color(0xFF767676),
+                                controller: signupViewModel.mbtiController,
+                                max: 4,
+                                hintText: '# MBTI',
+                                height: 50.h),
+                            SizedBox(height: 12.h),
+                            Self(controller: signupViewModel.selfController),
+                            SizedBox(height: 48.h),
+                            CustomButton(
+                                text: '시작하기',
+                                backgroundColor: Color(0xFF2D64D8),
+                                onPressed: () {}),
+                            SizedBox(
+                              height: 18.h,
+                            ),
+                            Text('프로필은 언제든 자유롭게',
+                                style: TextStyle(
+                                  fontFamily: 'KCCChassam',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF767676),
+                                )),
+                            Text('수정할 수 있습니다.',
+                                style: TextStyle(
+                                  fontFamily: 'KCCChassam',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF767676),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                 ],
               ),
             ),
           )),
+    );
+  }
+}
+
+class InputFD extends StatelessWidget {
+  final String labelText; // Text 위젯의 텍스트
+  final String text;
+  final Color color;
+  final bool showErrorText; // 에러 메시지를 보여줄지 여부
+  final String? errorText; // 에러 테스트 (선택적으로 입력 받도록 변경)
+  final TextEditingController controller;
+  final Function(String)? onChanged;
+  final int? max; //최대 입력 글자수
+  final String hintText;
+  final double height;
+  final Widget? suffix;
+  // 높이를 입력받는 새로운 매개변수
+
+  InputFD({
+    required this.labelText,
+    required this.text,
+    required this.color,
+    this.showErrorText = false, // showErrorText의 기본값을 false로 설정
+    this.errorText, // errorText를 선택적으로 입력 받도록 변경
+    required this.controller,
+    this.onChanged,
+    this.max,
+    required this.hintText,
+    required this.height,
+    this.suffix,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(width: 8.w),
+              Text(
+                labelText,
+                style: TextStyle(
+                  fontFamily: 'Pretendard-Regular',
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                  color: color,
+                  fontFamily: 'Pretendard-Regular',
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          Container(
+            height: height, // 높이를 입력 매개변수로 설정
+            child: TextFormField(
+              controller: controller,
+              onChanged: onChanged,
+              maxLength: max,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                hintText: hintText,
+                contentPadding:
+                    EdgeInsets.only(top: 10, bottom: 17, left: 10, right: 10),
+                counterText: '',
+                suffix: suffix,
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              if (showErrorText && errorText != null)
+                Text(
+                  errorText!,
+                  style: TextStyle(color: Colors.red),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Self extends StatelessWidget {
+  final TextEditingController controller;
+
+  Self({
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            SizedBox(width: 8.w),
+            Text(
+              '자기소개',
+              style: TextStyle(
+                fontFamily: 'Pretendard-Regular',
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Text(
+              ' (선택)',
+              style: TextStyle(
+                fontFamily: 'Pretendard-Regular',
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF767676),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 8.h),
+        TextField(
+          controller: controller,
+          maxLength: 40,
+          maxLines: 3, // 여기에서 줄넘김 기능을 추가합니다.
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            hintText: '학과, 학번 등 소개를 자유롭게 입력하세요 (40자 이내)',
+            hintStyle: TextStyle(
+              fontFamily: 'Pretendard-Regular',
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+            ),
+            counterText: '',
+            contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+          ),
+        ),
+      ],
     );
   }
 }

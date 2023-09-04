@@ -21,7 +21,7 @@ class NewLoignMain extends StatelessWidget {
       builder: (context, child) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
-          margin: EdgeInsets.only(top: 73.h),
+          margin: EdgeInsets.only(top: 63.h),
           child: Column(children: [
             Container(
               height: 268.h,
