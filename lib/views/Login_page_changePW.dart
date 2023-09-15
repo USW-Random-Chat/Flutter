@@ -14,12 +14,12 @@ class ChangePW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final accountRecoveryViewModel = Provider.of<AccountRecoveryViewModel>(context);
+    final accountRecoveryViewModel =
+        Provider.of<AccountRecoveryViewModel>(context);
 
     return ScreenUtilInit(
       designSize: Size(390, 844),
-      builder: (context, child)=>Scaffold(
+      builder: (context, child) => Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
           margin: EdgeInsets.only(top: 70.h),
@@ -31,13 +31,13 @@ class ChangePW extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   child: SuchatAppBar(
                     text: '비밀번호 변경',
-                    onPressed: (){
+                    onPressed: () {
                       accountRecoveryViewModel.pwController.clear();
                       accountRecoveryViewModel.pwMatchController.clear();
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) => const NewLoignMain()),
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const NewLoignMain()),
                       );
                     },
                   ),
@@ -46,47 +46,60 @@ class ChangePW extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 32.w),
                   child: Column(
                     children: [
-                      SizedBox( width: double.maxFinite,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                      SizedBox(height: 54.h),
-                      Change_PwInputFD(
-                        labelText: '비밀번호',
-                        showErrorText: accountRecoveryViewModel.pwError,
-                        errorText: '* 6자 이상 20자 이내로 작성해 주세요',
-                        obscureText: accountRecoveryViewModel.passwordVisible1,
-                        controller: accountRecoveryViewModel.pwController,
-                        onChanged: (value) =>
-                            accountRecoveryViewModel.validatePwInput(value),
-                        hintText: '새 비밀번호 입력 (문자, 숫자 포함 6~20자)',
-                        onPressed: () {
-                          accountRecoveryViewModel.togglePasswordVisibility1();
-                        },
-                        icon: accountRecoveryViewModel.passwordVisible1
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      SizedBox(height: 14.h,),
-                      Change_PwInputFD(
-                        labelText: '비밀번호 확인',
-                        showErrorText: accountRecoveryViewModel.pwMatch,
-                        errorText: '* 비밀번호가 일치하지 않습니다.',
-                        obscureText: accountRecoveryViewModel.passwordVisible2,
-                        controller: accountRecoveryViewModel.pwMatchController,
-                        onChanged: (value) =>
-                            accountRecoveryViewModel.validatePwInput(value),
-                        hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
-                        onPressed: () {
-                          accountRecoveryViewModel.togglePasswordVisibility2();
-                        },
-                        icon: accountRecoveryViewModel.passwordVisible2
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      SizedBox(height: 48.h),
-                      CustomButton(text: '변경 완료', backgroundColor: Color(0xff2D64D8), onPressed: (){})
-        ],),
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 54.h),
+                            Change_PwInputFD(
+                              labelText: '비밀번호',
+                              showErrorText: accountRecoveryViewModel.pwError,
+                              errorText: '* 6자 이상 20자 이내로 작성해 주세요',
+                              obscureText:
+                                  accountRecoveryViewModel.passwordVisible1,
+                              controller: accountRecoveryViewModel.pwController,
+                              onChanged: (value) => accountRecoveryViewModel
+                                  .validatePwInput(value),
+                              hintText: '새 비밀번호 입력 (문자, 숫자 포함 6~20자)',
+                              onPressed: () {
+                                accountRecoveryViewModel
+                                    .togglePasswordVisibility1();
+                              },
+                              icon: accountRecoveryViewModel.passwordVisible1
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            SizedBox(
+                              height: 14.h,
+                            ),
+                            Change_PwInputFD(
+                              labelText: '비밀번호 확인',
+                              showErrorText: accountRecoveryViewModel.pwMatch,
+                              errorText: '* 비밀번호가 일치하지 않습니다.',
+                              obscureText:
+                                  accountRecoveryViewModel.passwordVisible2,
+                              controller:
+                                  accountRecoveryViewModel.pwMatchController,
+                              onChanged: (value) => accountRecoveryViewModel
+                                  .validatePwInput(value),
+                              hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
+                              onPressed: () {
+                                accountRecoveryViewModel
+                                    .togglePasswordVisibility2();
+                              },
+                              icon: accountRecoveryViewModel.passwordVisible2
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            SizedBox(height: 48.h),
+                            CustomButton(
+                                text: '변경 완료',
+                                color: Colors.white,
+                                backgroundColor: Color(0xff2D64D8),
+                                onPressed: () {})
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -164,7 +177,7 @@ class Change_PwInputFD extends StatelessWidget {
                 ),
                 hintText: hintText,
                 hintStyle: TextStyle(
-                  fontSize:14.sp ,
+                  fontSize: 14.sp,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(icon),

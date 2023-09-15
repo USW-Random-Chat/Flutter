@@ -88,6 +88,7 @@ class SetProfile extends StatelessWidget {
                             SizedBox(height: 48.h),
                             CustomButton(
                                 text: '시작하기',
+                                color: Colors.white,
                                 backgroundColor: Color(0xFF2D64D8),
                                 onPressed: () {}),
                             SizedBox(
