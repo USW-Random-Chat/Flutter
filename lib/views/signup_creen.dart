@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/setprofile.dart';
+import 'package:suwon/views/signup_done.dart';
 import 'package:suwon/views/widgets/appbar.dart';
 import 'package:suwon/viewmodels/signup_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -95,12 +95,13 @@ class SignupScreen extends StatelessWidget {
                             SizedBox(height: 57.h),
                             CustomButton(
                                 text: '회원가입',
+                                color: Colors.white,
                                 backgroundColor: Color(0xFF111111),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SetProfile()),
+                                        builder: (context) => SignUpDone()),
                                   );
                                 }),
                             SizedBox(

@@ -55,6 +55,7 @@ class NewLoignMain extends StatelessWidget {
                   CustomButton(
                       // 로그인 버튼
                       text: '로그인',
+                      color: Colors.white,
                       backgroundColor: Color(0xff2d63d8),
                       onPressed: () async {
                         bool success = await loginViewModel.login();
@@ -125,6 +126,7 @@ class NewLoignMain extends StatelessWidget {
                   ),
                   CustomButton(
                       text: '회원가입',
+                      color: Colors.white,
                       backgroundColor: Color(0xFF111111),
                       onPressed: () {
                         Navigator.push(
