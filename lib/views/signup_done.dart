@@ -74,6 +74,7 @@ class _SignUpDoneState extends State<SignUpDone> {
                             fontFamily: 'Pretendard-Regular',
                           )),
                       SizedBox(
+                        height: 172.h,
                         child: showCheck ? AnimatedCheckCircle() : SizedBox(),
                       ),
                       Text('발송 된 링크 클릭 후 로그인 해주세요',
@@ -127,7 +128,8 @@ class AnimatedCheckCircle extends StatefulWidget {
 class _AnimatedCheckCircleState extends State<AnimatedCheckCircle>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
+  late Animation<double> _circleAnimation;
+  late Animation<double> _checkAnimation;
 
   @override
   void initState() {
@@ -135,11 +137,25 @@ class _AnimatedCheckCircleState extends State<AnimatedCheckCircle>
     // 애니메이션 컨트롤러 초기화
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2), // 애니메이션 지속 시간 설정
+      duration:
+          Duration(milliseconds: 1600), // 전체 애니메이션 지속 시간을 밀리초 단위로 설정 (1.5초)
     );
 
-    // 애니메이션 설정 (크기 변화: 0.0 -> 1.0)
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    // 파란색 원 애니메이션 설정 (크기 변화: 0.0 -> 1.0)
+    _circleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.0, 0.5, curve: Curves.easeInOut), // 첫 0.5초 동안 실행
+      ),
+    );
+
+    // 체크 아이콘 애니메이션 설정 (투명도 변화: 0.0 -> 1.0, 0.5초 동안 실행)
+    _checkAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.5, 1.0, curve: Curves.easeInOut), // 다음 0.5초 동안 실행
+      ),
+    );
 
     // 애니메이션 시작
     _controller.forward();
@@ -155,30 +171,39 @@ class _AnimatedCheckCircleState extends State<AnimatedCheckCircle>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 30.h),
-        width: 100.0,
-        height: 100.0,
-        decoration: BoxDecoration(
-          color: Color(0xFF2D64D8), // 파란색 원
-          shape: BoxShape.circle,
-        ),
-        child: Center(
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (context, child) {
-              return Opacity(
-                opacity: _animation.value, // 애니메이션 값에 따라 투명도 조절
-                child: child,
-              );
-            },
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 60.0,
-            ),
-          ),
-        ),
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          // 파란색 원이 처음에 없었다가 0.5초 후에 나타나도록 설정
+          if (_controller.value < 0.4) {
+            return SizedBox();
+          } else {
+            return Container(
+              width: 100.w, // 원래 크기
+              height: 100.h, // 원래 크기
+              decoration: BoxDecoration(
+                color: Color(0xFF2D64D8), // 파란색 원
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: AnimatedBuilder(
+                  animation: _checkAnimation,
+                  builder: (context, child) {
+                    return Opacity(
+                      opacity: _checkAnimation.value, // 체크 아이콘의 투명도를 조절
+                      child: child,
+                    );
+                  },
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                    size: 60.w,
+                  ),
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }
