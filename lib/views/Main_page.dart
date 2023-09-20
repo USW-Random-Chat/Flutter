@@ -74,7 +74,7 @@ class MainPage extends StatelessWidget {
               Column(
               children: [
                 Container(
-                height: 90.sp,
+                height: 85.sp,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
