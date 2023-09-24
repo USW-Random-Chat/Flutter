@@ -58,13 +58,20 @@ class NewLoignMain extends StatelessWidget {
                       color: Colors.white,
                       backgroundColor: Color(0xff2d63d8),
                       onPressed: () async {
-                        bool success = await loginViewModel.login();
+                        /*bool success = await loginViewModel.login();
                         if (success) {
-                          // 로그인 성공 처리
-                          // 예를 들어, 다음 화면으로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
                         } else {
                           // 로그인 실패 처리
                         }
+                        */
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainPage()),
+                        );
                       }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +95,7 @@ class NewLoignMain extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MainPage()),
+                                  builder: (context) => SearchPW()),
                             );
                           },
                           child: TextFont.fontRegular(
