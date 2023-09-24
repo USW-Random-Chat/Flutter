@@ -115,7 +115,14 @@ class SearchID extends StatelessWidget {
                               text: '로그인 하러가기',
                               color: Colors.white,
                               backgroundColor: Color(0xff111111),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NewLoignMain(),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
