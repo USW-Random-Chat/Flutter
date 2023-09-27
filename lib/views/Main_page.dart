@@ -21,23 +21,24 @@ class MainPage extends StatelessWidget {
           elevation: 0.0,
           backgroundColor: Colors.white,
           title: Container(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 20.sp),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'asstes/SUCHAT.png',
-                    width: 74.sp,
-                    height: 20.sp,
-                    fit: BoxFit.fill,
-                  )
-                ],
-              )
-            ],
-          )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 20.sp),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'asstes/SUCHAT.png',
+                      width: 74.sp,
+                      height: 20.sp,
+                      fit: BoxFit.fill,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
           centerTitle: false,
           automaticallyImplyLeading: false,
           actions: [
@@ -71,67 +72,78 @@ class MainPage extends StatelessWidget {
         endDrawer: Drawer(
           backgroundColor: Colors.white,
           width: 250.sp,
-          child: ListView(
-            padding: EdgeInsets.only(top: 0),
-            children: [
-              Column(
-                children: [
-                  Container(
-                    height: 85.sp,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          width: 190.sp,
-                        ),
-                        IconButton(
+          child: Container(
+            height: 800.sp,
+            width: double.infinity,
+            child:
+            ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.only(top: 0),
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: 85.sp,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 190.sp,
+                          ),
+                          IconButton(
                             onPressed: () {},
                             icon: Image.asset(
                               'asstes/close.png',
-                              scale: 4,
-                            ))
-                      ],
-                    ),
-                  ),
-                  UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(color: Colors.white),
-                    margin: EdgeInsets.zero,
-                    currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      backgroundImage: AssetImage('asstes/Group.png'),
-                    ),
-                    currentAccountPictureSize: Size(49.sp, 49.sp),
-                    accountName: Text(
-                      'AnSungMin',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'KCCChassam',
-                        fontSize: 22.sp,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
+                              scale: 4.sp,
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    accountEmail: Text(
-                      '# ISTP',
-                      style: TextStyle(
-                        color: Color(0xff767676),
-                        fontFamily: 'KCCChassam',
-                        fontSize: 14.sp,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
+                    UserAccountsDrawerHeader(
+                      decoration: BoxDecoration(color: Colors.white),
+                      margin: EdgeInsets.zero,
+                      currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('asstes/Group.png'),
                       ),
-                    ),
-                  ),
-                  Container(
-                      height: 400.sp,
-                      decoration: BoxDecoration(
-                          border: Border(
-                        top: BorderSide(
-                          color: Color(0xffEDEDED),
-                          width: 1,
+                      currentAccountPictureSize: Size(49.sp, 49.sp),
+                      accountName: Text(
+                        'AnSungMin',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'KCCChassam',
+                          fontSize: 22.sp,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
                         ),
-                        bottom: BorderSide(color: Color(0xffEDEDED), width: 1),
-                      )),
+                      ),
+                      accountEmail: Text(
+                        '# ISTP',
+                        style: TextStyle(
+                          color: Color(0xff767676),
+                          fontFamily: 'KCCChassam',
+                          fontSize: 14.sp,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 400.sp,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: Color(0xffEDEDED),
+                            width: 1.sp,
+                          ),
+                          bottom: BorderSide(
+                            color: Color(0xffEDEDED),
+                            width: 1.sp,
+                          ),
+                        ),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -161,7 +173,7 @@ class MainPage extends StatelessWidget {
                             },
                             trailing: Image.asset(
                               'asstes/Vector6.png',
-                              scale: 4,
+                              scale: 4.sp,
                             ),
                           ),
                           ListTile(
@@ -180,7 +192,7 @@ class MainPage extends StatelessWidget {
                             onTap: () {},
                             trailing: Image.asset(
                               'asstes/Vector6.png',
-                              scale: 4,
+                              scale: 4.sp,
                             ),
                           ),
                           ListTile(
@@ -199,7 +211,7 @@ class MainPage extends StatelessWidget {
                             onTap: () {},
                             trailing: Image.asset(
                               'asstes/Vector6.png',
-                              scale: 4,
+                              scale: 4.sp,
                             ),
                           ),
                           ListTile(
@@ -227,76 +239,78 @@ class MainPage extends StatelessWidget {
                             },
                             trailing: Image.asset(
                               'asstes/Vector6.png',
-                              scale: 4,
+                              scale: 4.sp,
                             ),
                           ),
                           SizedBox(
                             height: 100.sp,
                           )
                         ],
-                      )),
-                  Container(
-                    height: 250.sp,
-                    width: 250.sp,
-                    color: Color(0xffEDEDED),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 32.sp,
-                        ),
-                        Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 15.sp,
-                                ),
-                                Image.asset(
-                                  'asstes/SUCHAT.png',
-                                  scale: 3,
-                                ),
-                                SizedBox(
-                                  height: 12.sp,
-                                ),
-                                Text(
-                                  'Copyright 2023.\nFlag inc. all rights reserved.',
-                                  style: TextStyle(
-                                    color: Color(0xff767676),
-                                    fontFamily: 'Pretendard',
-                                    fontSize: 10.sp,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 0.25.sp,
+                      ),
+                    ),
+                    Container(
+                      height: 150.sp,
+                      width: double.infinity,
+                      color: Color(0xffEDEDED),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 32.sp,
+                          ),
+                          Column(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 15.sp,
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    '회원 탈퇴하기 >',
+                                  Image.asset(
+                                    'asstes/SUCHAT.png',
+                                    scale: 3.sp,
+                                  ),
+                                  SizedBox(
+                                    height: 12.sp,
+                                  ),
+                                  Text(
+                                    'Copyright 2023.\nFlag inc. all rights reserved.',
                                     style: TextStyle(
                                       color: Color(0xff767676),
                                       fontFamily: 'Pretendard',
-                                      fontSize: 12.sp,
+                                      fontSize: 10.sp,
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w400,
-                                      letterSpacing: 0.3.sp,
+                                      letterSpacing: 0.25.sp,
                                     ),
                                   ),
-                                  style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero),
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      '회원 탈퇴하기 >',
+                                      style: TextStyle(
+                                        color: Color(0xff767676),
+                                        fontFamily: 'Pretendard',
+                                        fontSize: 12.sp,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: 0.3.sp,
+                                      ),
+                                    ),
+                                    style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero),
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
         ),
         body: Container(
           color: Colors.white,
@@ -306,27 +320,30 @@ class MainPage extends StatelessWidget {
                 height: 18.sp,
               ),
               Container(
-                  child: Container(
-                child: Text(
-                  '_배너',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w400,
+                child: Container(
+                  child: Text(
+                    '_배너',
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
+                  alignment: Alignment.center,
+                  height: 55.sp,
+                  width: 390.sp,
+                  color: Color(0xffDBDBDB),
                 ),
-                alignment: Alignment.center,
-                height: 55.sp,
-                width: 390.sp,
-                color: Color(0xffDBDBDB),
-              )),
+              ),
               Container(
+                height: 331.h,
+                width: double.infinity,
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Transform.scale(
-                  scale: 1,
+                  scale: 1.sp,
                   child: Transform.translate(
                     offset: const Offset(25, -60),
-                    child: Image.asset('asstes/bubble_main.PNG'),
+                    child: Image.asset('asstes/bubble_main.PNG', scale: 1.sp,fit: BoxFit.fill,),
                   ),
                 ),
               ),
@@ -344,8 +361,10 @@ class MainPage extends StatelessWidget {
               ),
               SizedBox(
                 height: 24.sp,
+                width: double.infinity,
               ),
               Container(
+
                 child: Text(
                   '주의!! 욕설 및 상대방에게 불쾌함을 주는 채팅\n         적발 시 계정 이용이 제한됩니다   ',
                   style: TextStyle(
@@ -360,16 +379,20 @@ class MainPage extends StatelessWidget {
               ),
               SizedBox(
                 height: 120.sp,
+                width: double.infinity,
               ),
               Container(
+                height: 20.sp,
+                width: double.infinity,
                 child: Text(
-                  '@copyright by Flag',
+                  '@copyright by Flag',textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xff767676),
                     fontFamily: 'Pretendard',
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     letterSpacing: 0.3.sp,
+
                   ),
                 ),
               )
@@ -389,13 +412,14 @@ class CustomButton_main extends StatelessWidget {
     required this.text,
     required this.onPressed,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 64.sp,
       width: 334.sp,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(25.w),
         color: Color(0xff2D64D8),
       ),
       child: TextButton(
