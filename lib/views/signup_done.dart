@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/widgets/normal_alert_dialog.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/login_screen.dart';
 
@@ -109,7 +110,16 @@ class _SignUpDoneState extends State<SignUpDone> {
               CustomButton(
                 text: '메일 재발송',
                 backgroundColor: Color(0xFF111111),
-                onPressed: () {},
+                onPressed: () {
+                  NormalAlertDialog(
+                    title: "알림",
+                    message: "포털 메일이 재발송되었습니다.",
+                    onClose: () {
+                      // 다이얼로그 닫기 후 뒤로 화면이동
+                      //Navigator.of(context).pop();
+                    },
+                  ).show(context);
+                },
                 color: Colors.white,
               ),
             ],
