@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:suwon/views/widgets/cancel_and_action_alert_dialog.dart';
-import 'package:suwon/views/edit_profie.dart';
+import 'package:suwon/views/EditProfileDrawerScreen.dart';
+import 'package:suwon/views/TermsConditionsDrawerScreen.dart';
+import 'package:suwon/views/FeedbackDrawerScreen.dart';
 import 'package:suwon/views/login_screen.dart';
 import 'package:suwon/views/matching_loding.dart';
 
@@ -167,7 +169,8 @@ class MainPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => EditProfile(),
+                                    builder: (context) =>
+                                        EditProfileDrawerScreen(),
                                   ),
                                 );
                               },
@@ -189,7 +192,15 @@ class MainPage extends StatelessWidget {
                                   letterSpacing: -0.4.sp,
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TermsConditionsDrawerScreen(),
+                                  ),
+                                );
+                              },
                               trailing: Image.asset(
                                 'asstes/Vector6.png',
                                 scale: 4.sp,
@@ -208,7 +219,15 @@ class MainPage extends StatelessWidget {
                                   letterSpacing: -0.4.sp,
                                 ),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FeedbackDrawerScreen(),
+                                  ),
+                                );
+                              },
                               trailing: Image.asset(
                                 'asstes/Vector6.png',
                                 scale: 4.sp,
