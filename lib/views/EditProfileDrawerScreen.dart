@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/widgets/font.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfileDrawerScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
