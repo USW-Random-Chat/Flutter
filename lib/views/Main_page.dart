@@ -44,10 +44,10 @@ class MainPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      child: SvgPicture.asset('asstes/onclikmenu.svg', width: 28.w,
-                          height: 20.h),
+                      child: IconButton(icon: SvgPicture.asset('asstes/onclikmenu.svg', width: 28.w,
+                          height: 20.h), onPressed: (){},)
                     ),
-                    SizedBox(width: 32.w,),
+                    SizedBox(width: 25.w,),
                   ],
                 ),
               ),
