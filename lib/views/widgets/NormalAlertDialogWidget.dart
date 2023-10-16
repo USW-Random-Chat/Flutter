@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class NormalAlertDialog {
+class NormalAlertDialogWidget {
   final String title;
   final String message;
   final VoidCallback onClose;
 
-  NormalAlertDialog({
+  NormalAlertDialogWidget({
     required this.title,
     required this.message,
     required this.onClose,

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class CancelAndActionAlertDialog {
+class CancelAndActionAlertDialogWidget {
   final String title;
   final String action;
   final VoidCallback onCancel;
   final VoidCallback onAction;
 
-  CancelAndActionAlertDialog({
+  CancelAndActionAlertDialogWidget({
     required this.title,
     required this.action,
     required this.onCancel,
