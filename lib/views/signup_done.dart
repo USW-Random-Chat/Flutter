@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/widgets/normal_alert_dialog.dart';
+import 'package:suwon/views/widgets/NormalAlertDialogWidget.dart';
 import 'package:suwon/views/widgets/csbutton.dart';
 import 'package:suwon/views/login_screen.dart';
 
@@ -111,7 +111,7 @@ class _SignUpDoneState extends State<SignUpDone> {
                 text: '메일 재발송',
                 backgroundColor: Color(0xFF111111),
                 onPressed: () {
-                  NormalAlertDialog(
+                  NormalAlertDialogWidget(
                     title: "알림",
                     message: "포털 메일이 재발송되었습니다.",
                     onClose: () {
