@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:suwon/views/EditProfileDrawerScreen.dart';
 import 'package:suwon/views/TermsConditionsDrawerScreen.dart';
 import 'package:suwon/views/FeedbackDrawerScreen.dart';
-import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/views/LoginScreen.dart';
 import 'package:suwon/views/widgets/CancelAndActionAlertDialogWidget.dart';
 
 class CustomDrawerScreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class CustomDrawerScreen extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     icon: Image.asset(
-                      'asstes/close.png',
+                      'assets/close.png',
                       scale: 4.sp,
                     ),
                   )
@@ -52,7 +52,7 @@ class CustomDrawerScreen extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           backgroundColor: Colors.white,
-                          backgroundImage: AssetImage('asstes/Group.png'),
+                          backgroundImage: AssetImage('assets/Group.png'),
                         ),
                         SizedBox(height: 8),
                         Text(
@@ -88,7 +88,7 @@ class CustomDrawerScreen extends StatelessWidget {
             SizedBox(height: 20),
             ListTile_main(
               text: '프로필 수정',
-              Menu_Icon: 'asstes/profile.svg',
+              Menu_Icon: 'assets/profile.svg',
               onTap: () {
                 Navigator.push(
                   context,
@@ -101,7 +101,7 @@ class CustomDrawerScreen extends StatelessWidget {
             SizedBox(height: 20),
             ListTile_main(
               text: '이용약관',
-              Menu_Icon: 'asstes/policy.svg',
+              Menu_Icon: 'assets/policy.svg',
               onTap: () {
                 Navigator.push(
                   context,
@@ -114,7 +114,7 @@ class CustomDrawerScreen extends StatelessWidget {
             SizedBox(height: 20),
             ListTile_main(
               text: ' 피드백',
-              Menu_Icon: 'asstes/feedback.svg',
+              Menu_Icon: 'assets/feedback.svg',
               onTap: () {
                 Navigator.push(
                   context,
@@ -127,7 +127,7 @@ class CustomDrawerScreen extends StatelessWidget {
             SizedBox(height: 20),
             ListTile_main(
                 text: '로그아웃',
-                Menu_Icon: 'asstes/logout.svg',
+                Menu_Icon: 'assets/logout.svg',
                 onTap: () {
                   CancelAndActionAlertDialogWidget(
                           title: "로그아웃 하시겠습니까?",
@@ -136,7 +136,7 @@ class CustomDrawerScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NewLoignMain()),
+                                  builder: (context) => LoginScreen()),
                             );
                           },
                           onCancel: () {})
@@ -179,7 +179,7 @@ class ListTile_main extends StatelessWidget {
             ), // 제목
             SizedBox(width: 20.sp),
             Image.asset(
-              'asstes/Vector6.png',
+              'assets/Vector6.png',
               scale: 4.sp,
             )
           ],

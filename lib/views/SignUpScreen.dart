@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/signup_done.dart';
+import 'package:suwon/views/LoginScreen.dart';
+import 'package:suwon/views/SignUpDoneScreen.dart';
 import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
 import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return ScreenUtilInit(
       designSize: Size(390, 844),
       builder: (context, child) => Scaffold(
@@ -38,7 +38,7 @@ class SignupScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NewLoignMain(),
+                            builder: (context) => LoginScreen(),
                           ),
                         );
                       },
@@ -101,7 +101,8 @@ class SignupScreen extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUpDone()),
+                                        builder: (context) =>
+                                            SignUpDoneScreen()),
                                   );
                                 }),
                             SizedBox(
@@ -163,7 +164,7 @@ class SignupScreen extends StatelessWidget {
 class IdInputFD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return Column(
       children: [
         Row(

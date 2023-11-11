@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/Login_page_changePW.dart';
-import 'package:suwon/views/Login_page_searchID.dart';
-import 'package:suwon/views/Main_page.dart';
+import 'package:suwon/views/ChangePasswordScreen.dart';
+import 'package:suwon/views/SearchIdScreen.dart';
+import 'package:suwon/views/HomeScreen.dart';
 import 'package:suwon/views/Signup_creen.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/viewmodels/login_viewmodel.dart';
+import 'package:suwon/viewmodels/LoginVM.dart';
 import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-import 'Login_page_searchPW.dart';
+import 'SearchPasswordScreen.dart';
 
-class NewLoignMain extends StatelessWidget {
-  const NewLoignMain({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final loginViewModel = Provider.of<LoginViewModel>(context);
+    final loginViewModel = Provider.of<LoginVM>(context);
     return ScreenUtilInit(
       designSize: Size(390, 844),
       builder: (context, child) => Scaffold(
@@ -30,7 +30,7 @@ class NewLoignMain extends StatelessWidget {
               margin: EdgeInsets.only(left: 32.w),
               child: Image(
                 fit: BoxFit.fill,
-                image: AssetImage('asstes/bubble.PNG'),
+                image: AssetImage('assetes/bubble.PNG'),
               ),
             ),
             SizedBox(height: 32.h),
@@ -70,7 +70,7 @@ class NewLoignMain extends StatelessWidget {
                         */
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MainPage()),
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                         );
                       }),
                   Row(
@@ -81,7 +81,7 @@ class NewLoignMain extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SearchID()),
+                                  builder: (context) => const SearchIdScreen()),
                             );
                           },
                           child: TextFontWidget.fontRegular(
@@ -95,7 +95,7 @@ class NewLoignMain extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SearchPW()),
+                                  builder: (context) => SearchPasswordScreen()),
                             );
                           },
                           child: TextFontWidget.fontRegular(

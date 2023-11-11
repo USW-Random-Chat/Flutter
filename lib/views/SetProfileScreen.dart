@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/signup_creen.dart';
+import 'package:suwon/views/SignUpScreen.dart';
 import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class SetProfile extends StatelessWidget {
+class SetProfileScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return ScreenUtilInit(
       designSize: Size(390, 844),
       builder: (context, child) => Scaffold(
@@ -34,7 +34,7 @@ class SetProfile extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignupScreen(),
+                            builder: (context) => SignUpScreen(),
                           ),
                         );
                       },

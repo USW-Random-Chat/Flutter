@@ -40,7 +40,7 @@ class DrawerAppBarWidget extends StatelessWidget {
           IconButton(
             onPressed: onPressed,
             icon: Image.asset(
-              'asstes/close.png',
+              'assets/close.png',
               scale: iconScale,
             ),
           ),

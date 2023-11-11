@@ -1,22 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
-import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
+import 'package:suwon/views/LoginScreen.dart';
 import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
 import 'package:provider/provider.dart';
 
-class SearchID extends StatelessWidget {
-  const SearchID({super.key});
+class SearchIdScreen extends StatelessWidget {
+  const SearchIdScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final accountRecoveryViewModel =
-        Provider.of<AccountRecoveryViewModel>(context);
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryVM>(context);
 
     return ScreenUtilInit(
       designSize: Size(390, 844),
@@ -38,7 +37,7 @@ class SearchID extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const NewLoignMain()),
+                            builder: (context) => const LoginScreen()),
                       );
                     },
                   ),
@@ -119,7 +118,7 @@ class SearchID extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NewLoignMain(),
+                                    builder: (context) => LoginScreen(),
                                   ),
                                 );
                               },

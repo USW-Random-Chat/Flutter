@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/widgets/NormalAlertDialogWidget.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
-import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/views/LoginScreen.dart';
 
-class SignUpDone extends StatefulWidget {
-  const SignUpDone({super.key});
+class SignUpDoneScreen extends StatefulWidget {
+  const SignUpDoneScreen({super.key});
 
   @override
   _SignUpDoneState createState() => _SignUpDoneState();
 }
 
-class _SignUpDoneState extends State<SignUpDone> {
+class _SignUpDoneState extends State<SignUpDoneScreen> {
   bool showCheck = false;
 
   @override
@@ -99,7 +99,7 @@ class _SignUpDoneState extends State<SignUpDone> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NewLoignMain(),
+                      builder: (context) => LoginScreen(),
                     ),
                   );
                 },

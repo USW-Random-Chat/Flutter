@@ -1,22 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
-import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
+import 'package:suwon/views/LoginScreen.dart';
 import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
 import 'package:suwon/views/widgets/IdTextFieldWidget.dart';
 
-class SearchPW extends StatelessWidget {
+class SearchPasswordScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  SearchPW({super.key});
+  SearchPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final accountRecoveryViewModel =
-        Provider.of<AccountRecoveryViewModel>(context);
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryVM>(context);
 
     return ScreenUtilInit(
         designSize: Size(390, 844),
@@ -40,7 +38,7 @@ class SearchPW extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const NewLoignMain()),
+                                  builder: (context) => const LoginScreen()),
                             );
                           },
                         ),
