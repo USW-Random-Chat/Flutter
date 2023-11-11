@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 32.w),
               child: Image(
                 fit: BoxFit.fill,
-                image: AssetImage('assets/bubble.PNG'),
+                image: AssetImage('assetes/bubble.PNG'),
               ),
             ),
             SizedBox(height: 32.h),
