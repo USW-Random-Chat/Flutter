@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/widgets/NormalAlertDialogWidget.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:suwon/views/login_screen.dart';
 
 class SignUpDone extends StatefulWidget {
@@ -90,7 +90,7 @@ class _SignUpDoneState extends State<SignUpDone> {
                   ),
                 ],
               ),
-              CustomButton(
+              CustomButtonWidget(
                 text: '로그인',
                 color: Colors.black,
                 border: Border.all(width: 1, color: Color(0xFF2D64D8)),
@@ -107,7 +107,7 @@ class _SignUpDoneState extends State<SignUpDone> {
               SizedBox(
                 height: 12.h,
               ),
-              CustomButton(
+              CustomButtonWidget(
                 text: '메일 재발송',
                 backgroundColor: Color(0xFF111111),
                 onPressed: () {

@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
 import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/emailfield.dart';
-import 'package:suwon/views/widgets/idfield.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
+import 'package:suwon/views/widgets/IdTextFieldWidget.dart';
 
 class SearchPW extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -30,7 +30,7 @@ class SearchPW extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: SuchatAppBar(
+                        child: SuchatAppBarWidget(
                           text: '비밀번호 찾기',
                           onPressed: () {
                             accountRecoveryViewModel.idController.clear();
@@ -53,7 +53,7 @@ class SearchPW extends StatelessWidget {
                             SizedBox(
                               height: 42.h,
                             ),
-                            IdFD(
+                            IdTextFieldWidget(
                                 controller:
                                     accountRecoveryViewModel.idController,
                                 onChanged: (value) => accountRecoveryViewModel
@@ -61,7 +61,7 @@ class SearchPW extends StatelessWidget {
                             SizedBox(
                               height: 21.h,
                             ),
-                            EmailFD(
+                            EmailTextFieldWidget(
                                 controller:
                                     accountRecoveryViewModel.emailController,
                                 onChanged: (value) =>
@@ -110,7 +110,7 @@ class SearchPW extends StatelessWidget {
                             SizedBox(
                               height: 12.h,
                             ),
-                            CustomButton(
+                            CustomButtonWidget(
                               text: '인증코드 전송',
                               color: Colors.white,
                               backgroundColor: Color(0xff2D64D8),

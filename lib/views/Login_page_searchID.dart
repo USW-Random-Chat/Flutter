@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
 import 'package:suwon/viewmodels/signup_viewmodel.dart';
 import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/emailfield.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
 import 'package:provider/provider.dart';
 
 class SearchID extends StatelessWidget {
@@ -31,7 +31,7 @@ class SearchID extends StatelessWidget {
                 Container(
                   //상단바
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: SuchatAppBar(
+                  child: SuchatAppBarWidget(
                     text: '아이디 찾기',
                     onPressed: () {
                       accountRecoveryViewModel.emailController.clear();
@@ -55,7 +55,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 42.h,
                             ),
-                            EmailFD(
+                            EmailTextFieldWidget(
                                 controller:
                                     accountRecoveryViewModel.emailController,
                                 onChanged: (value) =>
@@ -102,7 +102,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 12.h,
                             ),
-                            CustomButton(
+                            CustomButtonWidget(
                               text: '확인메일 전송',
                               color: Colors.white,
                               backgroundColor: Color(0xff2D64D8),
@@ -111,7 +111,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 12.h,
                             ),
-                            CustomButton(
+                            CustomButtonWidget(
                               text: '로그인 하러가기',
                               color: Colors.white,
                               backgroundColor: Color(0xff111111),

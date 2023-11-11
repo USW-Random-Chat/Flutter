@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/signup_creen.dart';
-import 'package:suwon/views/widgets/appbar.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
 import 'package:suwon/viewmodels/signup_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/font.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
 class SetProfile extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -26,7 +26,7 @@ class SetProfile extends StatelessWidget {
                   Container(
                     //상단바
                     margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: SuchatAppBar(
+                    child: SuchatAppBarWidget(
                       text: ' 프로필 설정',
                       onPressed: () {
                         signupViewModel.idController.clear();
@@ -68,7 +68,7 @@ class SetProfile extends StatelessWidget {
                                 ),
                                 child: TextButton(
                                     onPressed: () {},
-                                    child: TextFont.fontRegular(
+                                    child: TextFontWidget.fontRegular(
                                         color: Color(0xFFFFFFFF),
                                         fontSize: 14,
                                         text: '중복 확인')),
@@ -86,7 +86,7 @@ class SetProfile extends StatelessWidget {
                             SizedBox(height: 12.h),
                             Self(controller: signupViewModel.selfController),
                             SizedBox(height: 48.h),
-                            CustomButton(
+                            CustomButtonWidget(
                                 text: '시작하기',
                                 color: Colors.white,
                                 backgroundColor: Color(0xFF2D64D8),
