@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:suwon/views/widgets/font.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class IdFD extends StatelessWidget {
+class IdTextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  const IdFD({
+  const IdTextFieldWidget({
     required this.controller,
     required this.onChanged,
-});
+  });
 
   @override
   Widget build(BuildContext context) {

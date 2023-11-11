@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SuchatAppBar extends StatelessWidget {
+class SuchatAppBarWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const SuchatAppBar({
+  const SuchatAppBarWidget({
     required this.text,
     required this.onPressed,
   });

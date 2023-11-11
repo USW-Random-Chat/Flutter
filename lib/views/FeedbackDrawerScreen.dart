@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/widgets/DrawerAppBarWidget.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 
 class FeedbackDrawerScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -52,7 +52,7 @@ class FeedbackDrawerScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 24.h),
-                        CustomButton(
+                        CustomButtonWidget(
                             text: "제출하기",
                             backgroundColor: Color(0xFF2D64D8),
                             onPressed: () {},

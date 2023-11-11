@@ -1,21 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
+import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
 
-import 'package:suwon/views/login_screen.dart';
+import 'package:suwon/views/LoginScreen.dart';
 
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 
-class ChangePW extends StatelessWidget {
+class ChangePasswordScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final accountRecoveryViewModel =
-        Provider.of<AccountRecoveryViewModel>(context);
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryVM>(context);
 
     return ScreenUtilInit(
       designSize: Size(390, 844),
@@ -29,7 +27,7 @@ class ChangePW extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: SuchatAppBar(
+                  child: SuchatAppBarWidget(
                     text: '비밀번호 변경',
                     onPressed: () {
                       accountRecoveryViewModel.pwController.clear();
@@ -37,7 +35,7 @@ class ChangePW extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const NewLoignMain()),
+                            builder: (context) => const LoginScreen()),
                       );
                     },
                   ),
@@ -93,7 +91,7 @@ class ChangePW extends StatelessWidget {
                                   : Icons.visibility,
                             ),
                             SizedBox(height: 48.h),
-                            CustomButton(
+                            CustomButtonWidget(
                                 text: '변경 완료',
                                 color: Colors.white,
                                 backgroundColor: Color(0xff2D64D8),

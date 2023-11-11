@@ -1,22 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/viewmodels/AccountRecovery_viewmodel.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
-import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/emailfield.dart';
+import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
+import 'package:suwon/views/LoginScreen.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
 import 'package:provider/provider.dart';
 
-class SearchID extends StatelessWidget {
-  const SearchID({super.key});
+class SearchIdScreen extends StatelessWidget {
+  const SearchIdScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final accountRecoveryViewModel =
-        Provider.of<AccountRecoveryViewModel>(context);
+    final accountRecoveryViewModel = Provider.of<AccountRecoveryVM>(context);
 
     return ScreenUtilInit(
       designSize: Size(390, 844),
@@ -31,14 +30,14 @@ class SearchID extends StatelessWidget {
                 Container(
                   //상단바
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: SuchatAppBar(
+                  child: SuchatAppBarWidget(
                     text: '아이디 찾기',
                     onPressed: () {
                       accountRecoveryViewModel.emailController.clear();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const NewLoignMain()),
+                            builder: (context) => const LoginScreen()),
                       );
                     },
                   ),
@@ -55,7 +54,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 42.h,
                             ),
-                            EmailFD(
+                            EmailTextFieldWidget(
                                 controller:
                                     accountRecoveryViewModel.emailController,
                                 onChanged: (value) =>
@@ -102,7 +101,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 12.h,
                             ),
-                            CustomButton(
+                            CustomButtonWidget(
                               text: '확인메일 전송',
                               color: Colors.white,
                               backgroundColor: Color(0xff2D64D8),
@@ -111,7 +110,7 @@ class SearchID extends StatelessWidget {
                             SizedBox(
                               height: 12.h,
                             ),
-                            CustomButton(
+                            CustomButtonWidget(
                               text: '로그인 하러가기',
                               color: Colors.white,
                               backgroundColor: Color(0xff111111),
@@ -119,7 +118,7 @@ class SearchID extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NewLoignMain(),
+                                    builder: (context) => LoginScreen(),
                                   ),
                                 );
                               },

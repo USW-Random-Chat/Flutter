@@ -2,17 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/Main_page.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
+import 'package:suwon/views/HomeScreen.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 
-class MatchingLoading extends StatefulWidget {
-  const MatchingLoading({Key? key}) : super(key: key);
+class MatchingLoadingScreen extends StatefulWidget {
+  const MatchingLoadingScreen({Key? key}) : super(key: key);
 
   @override
   _MatchingLoadingState createState() => _MatchingLoadingState();
 }
 
-class _MatchingLoadingState extends State<MatchingLoading> {
+class _MatchingLoadingState extends State<MatchingLoadingScreen> {
   StreamController<int> dotStreamController = StreamController<int>();
   int numDots = 0;
 
@@ -89,13 +89,13 @@ class _MatchingLoadingState extends State<MatchingLoading> {
                 fontsize: 16.sp,
               ),
               SizedBox(height: 60.h),
-              CustomButton(
+              CustomButtonWidget(
                 text: '매칭 중단하기',
                 backgroundColor: Color(0xff111111),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
                 color: Color(0xffFFFFFF),

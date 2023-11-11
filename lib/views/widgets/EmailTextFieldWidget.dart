@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:suwon/views/widgets/font.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class EmailFD extends StatelessWidget {
+class EmailTextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
 
-  const EmailFD({
+  const EmailTextFieldWidget({
     required this.controller,
     required this.onChanged,
   });
@@ -34,7 +34,7 @@ class EmailFD extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: Color(0xFF989898),
               ),
-              suffix: TextFont.fontRegular(
+              suffix: TextFontWidget.fontRegular(
                   text: '@ suwon.ac.kr',
                   fontSize: 16,
                   color: Color(0xFF000000)),

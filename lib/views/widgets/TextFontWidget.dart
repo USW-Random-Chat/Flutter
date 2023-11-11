@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TextFont {
+class TextFontWidget {
   static Widget fontRegular({
     required String text,
     required double fontSize,

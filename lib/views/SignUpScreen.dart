@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/login_screen.dart';
-import 'package:suwon/views/signup_done.dart';
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:suwon/views/LoginScreen.dart';
+import 'package:suwon/views/SignUpDoneScreen.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/emailfield.dart';
-import 'package:suwon/views/widgets/font.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return ScreenUtilInit(
       designSize: Size(390, 844),
       builder: (context, child) => Scaffold(
@@ -28,7 +28,7 @@ class SignupScreen extends StatelessWidget {
                   Container(
                     //상단바
                     margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: SuchatAppBar(
+                    child: SuchatAppBarWidget(
                       text: ' 회원가입',
                       onPressed: () {
                         signupViewModel.idController.clear();
@@ -38,7 +38,7 @@ class SignupScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NewLoignMain(),
+                            builder: (context) => LoginScreen(),
                           ),
                         );
                       },
@@ -88,12 +88,12 @@ class SignupScreen extends StatelessWidget {
                                   : Icons.visibility,
                             ),
                             SizedBox(height: 46.h),
-                            EmailFD(
+                            EmailTextFieldWidget(
                                 controller: signupViewModel.emailController,
                                 onChanged: (value) =>
                                     signupViewModel.isEmailValid),
                             SizedBox(height: 57.h),
-                            CustomButton(
+                            CustomButtonWidget(
                                 text: '회원가입',
                                 color: Colors.white,
                                 backgroundColor: Color(0xFF111111),
@@ -101,7 +101,8 @@ class SignupScreen extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUpDone()),
+                                        builder: (context) =>
+                                            SignUpDoneScreen()),
                                   );
                                 }),
                             SizedBox(
@@ -110,7 +111,7 @@ class SignupScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextFont.fontSemiBold(
+                                TextFontWidget.fontSemiBold(
                                   text: '회원가입 시 ',
                                   fontSize: 12.sp,
                                   color: Color(0xFF989898),
@@ -119,13 +120,13 @@ class SignupScreen extends StatelessWidget {
                                   onTap: () {
                                     // 버튼이 클릭되었을 때 실행될 코드
                                   },
-                                  child: TextFont.fontSemiBold(
+                                  child: TextFontWidget.fontSemiBold(
                                     text: '서비스 이용약관',
                                     fontSize: 12.sp,
                                     color: Color(0xFF2D64D8),
                                   ),
                                 ),
-                                TextFont.fontSemiBold(
+                                TextFontWidget.fontSemiBold(
                                   text: ' 및 ',
                                   fontSize: 12.sp,
                                   color: Color(0xFF989898),
@@ -134,7 +135,7 @@ class SignupScreen extends StatelessWidget {
                                   onTap: () {
                                     // 버튼이 클릭되었을 때 실행될 코드
                                   },
-                                  child: TextFont.fontSemiBold(
+                                  child: TextFontWidget.fontSemiBold(
                                     text: '개인정보 처리방침',
                                     fontSize: 12.sp,
                                     color: Color(0xFF2D64D8),
@@ -142,7 +143,7 @@ class SignupScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            TextFont.fontSemiBold(
+                            TextFontWidget.fontSemiBold(
                               text: '하신 것으로 간주됩니다',
                               fontSize: 12.sp,
                               color: Color(0xFF989898),
@@ -163,7 +164,7 @@ class SignupScreen extends StatelessWidget {
 class IdInputFD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return Column(
       children: [
         Row(
@@ -212,7 +213,7 @@ class IdInputFD extends StatelessWidget {
                 ),
                 child: TextButton(
                     onPressed: () {},
-                    child: TextFont.fontRegular(
+                    child: TextFontWidget.fontRegular(
                         color: Color(0xFFFFFFFF), fontSize: 14, text: '중복 확인')),
               ),
             ),

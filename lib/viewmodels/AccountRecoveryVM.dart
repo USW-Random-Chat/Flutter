@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AccountRecoveryViewModel extends ChangeNotifier {
+class AccountRecoveryVM extends ChangeNotifier {
   String _id = '';
   String _password = '';
   String _email = '';
   String _validationCode = '';
-
 
   bool _idError = false;
   bool _pwError = false;
@@ -19,7 +18,6 @@ class AccountRecoveryViewModel extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController pwMatchController = TextEditingController();
   TextEditingController ValidationCodeController = TextEditingController();
-
 
   bool get idError => _idError;
   bool get pwError => _pwError;
@@ -78,7 +76,7 @@ class AccountRecoveryViewModel extends ChangeNotifier {
 
   bool validateEmail(String value) {
     final RegExp emailRegExp =
-    RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+        RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
     _isEmailValid = emailRegExp.hasMatch(value);
     notifyListeners();
     return _isEmailValid;
@@ -90,11 +88,11 @@ class AccountRecoveryViewModel extends ChangeNotifier {
       //
       String email = _email;
       print('eamil: $email');
-
     }
   }
+
   Future<void> Search_PW() async {
-    if(validateEmail(_email)&& !_idError) {
+    if (validateEmail(_email) && !_idError) {
       // 이메일 및 ID 검증
       // 인증코드 전송 및 검증
       String id = _id;

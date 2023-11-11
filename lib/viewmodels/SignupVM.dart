@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SignupViewModel extends ChangeNotifier {
+class SignupVM extends ChangeNotifier {
   String _id = '';
   String _password = '';
   String _email = '';

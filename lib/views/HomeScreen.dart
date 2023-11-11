@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:suwon/views/CustomDrawerScreen.dart';
-import 'package:suwon/views/matching_loding.dart';
+import 'package:suwon/views/MatchingLoadingScreen.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MainPage extends StatelessWidget {
                         width: 15.w,
                       ),
                       Image.asset(
-                        'asstes/SUCHAT.png',
+                        'assets/SUCHAT.png',
                         width: 76.w,
                         height: 20.h,
                       )
@@ -51,7 +51,7 @@ class MainPage extends StatelessWidget {
                           onPressed: () {
                             _scaffoldKey.currentState?.openEndDrawer();
                           },
-                          icon: SvgPicture.asset('asstes/onclikmenu.svg',
+                          icon: SvgPicture.asset('assets/onclikmenu.svg',
                               width: 28.w, height: 20.h),
                         )),
                         SizedBox(
@@ -93,7 +93,7 @@ class MainPage extends StatelessWidget {
                             offset: const Offset(0, -60),
                             child: ClipRect(
                               child: Image.asset(
-                                'asstes/bubble_main.PNG',
+                                'assets/bubble_main.PNG',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -109,7 +109,7 @@ class MainPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MatchingLoading()),
+                              builder: (context) => MatchingLoadingScreen()),
                         );
                       },
                     ),

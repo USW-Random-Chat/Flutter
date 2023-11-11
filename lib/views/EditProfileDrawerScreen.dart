@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/Main_page.dart';
-import 'package:suwon/views/signup_creen.dart';
-import 'package:suwon/views/widgets/appbar.dart';
-import 'package:suwon/viewmodels/signup_viewmodel.dart';
+import 'package:suwon/views/HomeScreen.dart';
+import 'package:suwon/views/SignUpScreen.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/views/widgets/csbutton.dart';
-import 'package:suwon/views/widgets/font.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
 class EditProfileDrawerScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final signupViewModel = Provider.of<SignupViewModel>(context);
+    final signupViewModel = Provider.of<SignupVM>(context);
     return ScreenUtilInit(
       designSize: Size(390, 844),
       builder: (context, child) => Scaffold(
@@ -27,7 +27,7 @@ class EditProfileDrawerScreen extends StatelessWidget {
                   Container(
                     //상단바
                     margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: SuchatAppBar(
+                    child: SuchatAppBarWidget(
                       text: ' 프로필 설정',
                       onPressed: () {
                         signupViewModel.idController.clear();
@@ -35,7 +35,7 @@ class EditProfileDrawerScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MainPage(),
+                            builder: (context) => HomeScreen(),
                           ),
                         );
                       },
@@ -70,7 +70,7 @@ class EditProfileDrawerScreen extends StatelessWidget {
                                 ),
                                 child: TextButton(
                                     onPressed: () {},
-                                    child: TextFont.fontRegular(
+                                    child: TextFontWidget.fontRegular(
                                         color: Color(0xFFFFFFFF),
                                         fontSize: 14,
                                         text: '중복 확인')),

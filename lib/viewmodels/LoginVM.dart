@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginViewModel extends ChangeNotifier {
+class LoginVM extends ChangeNotifier {
   String _userid = '';
   String _userpw = '';
 
