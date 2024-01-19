@@ -40,17 +40,19 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InputFD(
-                      //ID 입력창
-                      onChanged: (value) => loginViewModel.setUserid(value),
-                      hintText: 'ID'),
+                    // ID 입력창
+                    onChanged: (value) => loginViewModel.setUserid(value),
+                    hintText: 'ID',
+                  ),
                   SizedBox(
                     height: 10.h,
                   ),
                   InputFD(
-                      // PW 입력창
-                      onChanged: (value) => loginViewModel.setUserpw(value),
-                      hintText: 'PW',
-                      obscureText: true),
+                    // PW 입력창
+                    onChanged: (value) => loginViewModel.setUserpw(value),
+                    hintText: 'PW',
+                    obscureText: true,
+                  ),
                   SizedBox(height: 24.h),
                   CustomButtonWidget(
                       // 로그인 버튼
@@ -58,20 +60,18 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.white,
                       backgroundColor: Color(0xff2d63d8),
                       onPressed: () async {
-                        /*bool success = await loginViewModel.login();
-                        if (success) {
+                        await loginViewModel.login();
+                        // 로그인 결과에 따른 처리를 추가할 수 있음
+                        print(loginViewModel.loginResult);
+
+                        // 예제로 홈 화면으로 이동하는 부분 추가
+                        if (loginViewModel.loginResult == '로그인 성공') {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
                           );
-                        } else {
-                          // 로그인 실패 처리
                         }
-                        */
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                        );
                       }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/ChattingScreen.dart';
 import 'package:suwon/views/HomeScreen.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 
@@ -95,7 +96,7 @@ class _MatchingLoadingState extends State<MatchingLoadingScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => RandomChat()),
                   );
                 },
                 color: Color(0xffFFFFFF),

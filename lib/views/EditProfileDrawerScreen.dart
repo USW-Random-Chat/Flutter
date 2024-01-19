@@ -56,7 +56,7 @@ class EditProfileDrawerScreen extends StatelessWidget {
                               color: Color(0xFFFF0000),
                               controller: signupViewModel.nicknameController,
                               onChanged: (value) =>
-                                  signupViewModel.validateNickName(value),
+                                  signupViewModel.validateNickNameInput(value),
                               showErrorText: signupViewModel.nicknameError,
                               errorText: '* 닉네임은 8자 이내로 작성 해주세요',
                               hintText: '# NICKNAME',

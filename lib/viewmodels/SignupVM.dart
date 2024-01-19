@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:suwon/models/user_model.dart';
+import 'dart:convert';
 
 class SignupVM extends ChangeNotifier {
   String _id = '';
@@ -61,7 +64,7 @@ class SignupVM extends ChangeNotifier {
     notifyListeners();
   }
 
-  void validateNickName(String value) {
+  void validateNickNameInput(String value) {
     if (value.length < 9) {
       _nicknameError = false;
     } else {
@@ -88,17 +91,39 @@ class SignupVM extends ChangeNotifier {
     return _isEmailValid;
   }
 
-  Future<void> signup() async {
-    if (validateEmail(_email) && !_idError && !_pwError && _pwMatch) {
-      // 회원가입 로직을 여기에 구현하면 됩니다.
-      // 예: API 호출, 데이터 저장 등
-      String id = _id;
-      String password = _password;
-      String email = _email;
+  Future<void> signup(UserModel userModel) async {
+    try {
+      // Convert UserModel to JSON
+      Map<String, dynamic> userJson = {
+        "id1": userModel.memberId,
+        "password1!": userModel.password,
+        "valent9": userModel.email,
+        "n1": userModel.nickname,
+      };
 
-      print('id: $id');
-      print('Password: $password');
-      print('email: $email');
+      // Encode JSON to String
+      String body = json.encode(userJson);
+
+      // Make a POST request to your backend API
+      final response = await http.post(
+        Uri.parse("http://3.35.83.91:8080/member/sign-up"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      );
+
+      // 응답 상태 확인
+      if (response.statusCode == 200) {
+        // 회원가입 성공 시, 필요한 경우 응답을 처리
+        print('Signup successful');
+      } else {
+        // 회원가입 실패 시, 에러 처리
+        print('Signup failed - ${response.statusCode}: ${response.body}');
+      }
+    } catch (error) {
+      // 회원가입 과정에서 발생하는 에러 처리
+      print('Signup failed: $error');
     }
   }
 }

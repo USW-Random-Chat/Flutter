@@ -1,18 +1,10 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:suwon/views/LoginScreen.dart';
-import 'package:suwon/views/SignUpDoneScreen.dart';
-import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
 import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
-import 'package:suwon/views/widgets/CustomButtonWidget.dart';
-import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
-import 'package:suwon/views/widgets/TextFontWidget.dart';
 
-class SignUpScreen extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  SignUpScreen({super.key});
+class EmailAuth extends StatelessWidget {
+  const EmailAuth({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,29 +46,8 @@ class SignUpScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 40.h),
-                            IdInputFD(
-                              labelText: '아이디',
-                              hintText: '아이디 입력 (4~16자)',
-                              controller: signupViewModel.idController,
-                              showErrorText: signupViewModel.idError,
-                              errorText: '* 4자 이상 16자 이내로 작성해 주세요',
-                              onChanged: (value) =>
-                                  signupViewModel.validateIdInput(value),
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 40.h),
-                            IdInputFD(
-                              labelText: '닉네임',
-                              hintText: '닉네임 입력',
-                              controller: signupViewModel.nicknameController,
-                              showErrorText: signupViewModel.nicknameError,
-                              errorText: '이미 사용중인 닉네임 입니다.',
-                              onChanged: (value) =>
-                                  signupViewModel.validateNickNameInput(value),
-                              onPressed: () {},
-                            ),
-                            SizedBox(height: 40.h),
+                            IdInputFD(),
+                            SizedBox(height: 44.h),
                             PwInputFD(
                               labelText: '비밀번호',
                               showErrorText: signupViewModel.pwError,
@@ -110,13 +81,17 @@ class SignUpScreen extends StatelessWidget {
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                             ),
-                            SizedBox(height: 60.h),
+                            SizedBox(height: 46.h),
+                            EmailTextFieldWidget(
+                                controller: signupViewModel.emailController,
+                                onChanged: (value) =>
+                                    signupViewModel.isEmailValid),
+                            SizedBox(height: 57.h),
                             CustomButtonWidget(
                                 text: '다음',
                                 color: Colors.white,
                                 backgroundColor: Color(0xFF111111),
                                 onPressed: () {
-                                  signupViewModel.signup;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -179,174 +154,4 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-class IdInputFD extends StatelessWidget {
-  final String labelText;
-  final String hintText;
-  final TextEditingController controller;
-  final Function(String) onChanged;
-  final bool showErrorText;
-  final String errorText;
-  final VoidCallback? onPressed;
-
-  IdInputFD({
-    required this.labelText,
-    required this.hintText,
-    required this.controller,
-    required this.onChanged,
-    required this.showErrorText,
-    required this.errorText,
-    this.onPressed,
-  });
-
-  // 에러 메시지 위젯
-  Widget errorTextWidget() {
-    if (showErrorText) {
-      return Text(
-        errorText,
-        style: TextStyle(color: Colors.red),
-      );
-    } else {
-      return Container(); // 에러가 없으면 빈 컨테이너 반환
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            SizedBox(width: 8.w),
-            Text(
-              labelText,
-              style: TextStyle(
-                fontFamily: 'Pretendard-Regular',
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            SizedBox(
-              width: 12.w,
-            ),
-            errorTextWidget(), // 에러 메시지 위젯 추가
-          ],
-        ),
-        SizedBox(height: 8.h),
-        SizedBox(
-          height: 50.h,
-          child: TextFormField(
-            controller: controller,
-            onChanged: onChanged,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              labelStyle: TextStyle(
-                fontFamily: 'Pretendard-Light',
-                fontSize: 14.sp,
-              ),
-              hintText: hintText,
-              contentPadding:
-                  EdgeInsets.only(top: 10, bottom: 17, left: 10, right: 10),
-              suffix: Container(
-                width: 100.w,
-                height: 38.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Color(0xFF2D64D8),
-                ),
-                child: TextButton(
-                  onPressed: onPressed ?? () {}, // onPressed가 null이 아닐 때만 사용
-                  child: TextFontWidget.fontRegular(
-                    color: Color(0xFFFFFFFF),
-                    fontSize: 14,
-                    text: '중복 확인',
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class PwInputFD extends StatelessWidget {
-  final String labelText; // Text 위젯의 텍스트
-  final bool showErrorText; // 에러 메시지를 보여줄지 여부
-  final String errorText; // 에러 테스트
-  final bool obscureText;
-  final TextEditingController controller;
-  final Function(String) onChanged;
-  final String hintText;
-  final VoidCallback? onPressed;
-  final IconData icon;
-
-  PwInputFD({
-    required this.labelText,
-    required this.showErrorText,
-    required this.errorText,
-    required this.obscureText,
-    required this.controller,
-    required this.onChanged,
-    required this.hintText,
-    this.onPressed,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(width: 8.w),
-              Text(
-                labelText,
-                style: TextStyle(
-                  fontFamily: 'Pretendard-Regular',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                width: 12.w,
-              ),
-              if (showErrorText)
-                Text(
-                  errorText,
-                  style: TextStyle(color: Colors.red),
-                ),
-            ],
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
-          SizedBox(
-            height: 50.h,
-            child: TextFormField(
-              obscureText: obscureText,
-              controller: controller,
-              onChanged: onChanged,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                hintText: hintText,
-                contentPadding:
-                    EdgeInsets.only(top: 10, bottom: 17, left: 10, right: 10),
-                suffixIcon: IconButton(
-                  icon: Icon(icon),
-                  onPressed: onPressed,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+*/
