@@ -35,7 +35,6 @@ class ChatViewModel extends ChangeNotifier {
           chatMessages.add(message);
           notifyListeners(); // 새로운 메시지가 추가될 때마다 호출
         }
-        print('채팅');
       },
     );
   }

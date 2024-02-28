@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/views/HomeScreen.dart';
-import 'package:suwon/viewmodels/Chatting_Viewmodel.dart';
+import 'package:suwon/viewmodels/ChattingVM.dart';
 
 class RandomChat extends StatefulWidget {
   const RandomChat({Key? key});

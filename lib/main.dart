@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
-import 'package:suwon/viewmodels/Chatting_Viewmodel.dart';
+import 'package:suwon/viewmodels/ChattingVM.dart';
 import 'package:suwon/viewmodels/LoginVM.dart';
 import 'package:suwon/viewmodels/SignupVM.dart'; // 추가: SignupViewModel 임포트
 import 'package:suwon/views/LoginScreen.dart';
