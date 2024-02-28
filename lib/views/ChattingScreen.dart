@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:suwon/views/HomeScreen.dart';
+import 'package:suwon/viewmodels/Chatting_Viewmodel.dart';
 
 class RandomChat extends StatefulWidget {
   const RandomChat({Key? key});
@@ -11,7 +13,14 @@ class RandomChat extends StatefulWidget {
 }
 
 class _RandomChatState extends State<RandomChat> {
-  bool isChatEnabled = false;
+  late ChatViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = Provider.of<ChatViewModel>(context, listen: false);
+    viewModel.initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +32,21 @@ class _RandomChatState extends State<RandomChat> {
           height: 812.h,
           child: Column(
             children: [
-              header(),
+              _Header(),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [
-                      // Add your chat messages here
-                    ],
+                    children: viewModel.chatMessages
+                        .map(
+                            (message) => _ChatBubble(message: message.contents))
+                        .toList(),
                   ),
                 ),
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 24.w),
                 height: 58.h,
-                child: CustomTextField(
-                  hintText: '채팅을 시작해 보세요 . . .',
-                  onIconTap: (isEnabled) {
-                    setState(() {
-                      isChatEnabled = isEnabled;
-                    });
-                  },
-                ),
+                child: _CustomTextField(viewModel: viewModel),
               ),
             ],
           ),
@@ -51,8 +54,59 @@ class _RandomChatState extends State<RandomChat> {
       ),
     );
   }
+}
 
-  Widget header() {
+class _CustomTextField extends StatefulWidget {
+  final ChatViewModel viewModel;
+
+  _CustomTextField({Key? key, required this.viewModel}) : super(key: key);
+
+  @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<_CustomTextField> {
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _textController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        hintText: '채팅을 시작하세요...',
+        hintStyle: TextStyle(
+          color: Color(0xff737373),
+          fontFamily: 'Pretendard-Regular',
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+        ),
+        contentPadding: EdgeInsets.only(left: 17.w, top: 12, bottom: 12),
+        suffixIcon: GestureDetector(
+          onTap: () {
+            String message = _textController.text;
+            if (message.isNotEmpty) {
+              widget.viewModel.sendMessage(message);
+              _textController.clear();
+            }
+          },
+          child: SvgPicture.asset(
+            'assets/onchatbt.svg',
+            width: 40.w,
+            height: 40.h,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final chattingViewModel = Provider.of<ChatViewModel>(context);
     return Container(
       height: 128.h,
       alignment: Alignment.bottomCenter,
@@ -71,7 +125,7 @@ class _RandomChatState extends State<RandomChat> {
                 ),
                 SizedBox(width: 12.w),
                 Text(
-                  'nickname',
+                  '닉네임',
                   style: TextStyle(
                     fontFamily: 'KCCChassam',
                     fontSize: 22.sp,
@@ -84,11 +138,6 @@ class _RandomChatState extends State<RandomChat> {
           ),
           SizedBox(width: 95.w),
           GestureDetector(
-            onTap: isChatEnabled
-                ? null
-                : () {
-                    onPressed();
-                  },
             child: SvgPicture.asset(
               'assets/Report button.svg',
               width: 40.w,
@@ -113,59 +162,25 @@ class _RandomChatState extends State<RandomChat> {
       ),
     );
   }
-
-  void onPressed() {
-    // 버튼이 클릭되었을 때의 동작을 정의합니다.
-  }
 }
 
-class CustomTextField extends StatefulWidget {
-  final String hintText;
-  final Function(bool) onIconTap;
+class _ChatBubble extends StatelessWidget {
+  final String message;
 
-  CustomTextField({required this.hintText, required this.onIconTap});
-
-  @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
-  bool isInputEmpty = true;
+  const _ChatBubble({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (text) {
-        setState(() {
-          isInputEmpty = text.isEmpty;
-        });
-        widget.onIconTap(isInputEmpty);
-      },
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        hintText: widget.hintText,
-        hintStyle: TextStyle(
-          color: Color(0xff737373),
-          fontFamily: 'Pretendard-Regular',
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
-        ),
-        contentPadding: EdgeInsets.only(left: 17.w, top: 12, bottom: 12),
-        suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              isInputEmpty = !isInputEmpty;
-            });
-            widget.onIconTap(isInputEmpty);
-          },
-          child: SvgPicture.asset(
-            isInputEmpty ? 'assets/offchatbt.svg' : 'assets/onchatbt.svg',
-            width: 40.w,
-            height: 40.h,
-          ),
-        ),
+    return Container(
+      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.lightBlueAccent,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        message,
+        style: TextStyle(color: Colors.white),
       ),
     );
   }

@@ -1,8 +1,8 @@
 class UserModel {
-  final String memberId, password, email, nickname;
+  final String account, password, email, nickname;
 
   UserModel.fromJson(Map<String, dynamic> json)
-      : memberId = json["memberId"],
+      : account = json["account"],
         password = json["password"],
         email = json["email"],
         nickname = json["nickname"];

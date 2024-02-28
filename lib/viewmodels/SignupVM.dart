@@ -4,13 +4,12 @@ import 'package:suwon/models/user_model.dart';
 import 'dart:convert';
 
 class SignupVM extends ChangeNotifier {
-  String _id = '';
-  String _password = '';
-  String _email = '';
-  String _nickname = '';
-  String _mbti = '';
-  String _self = ''; //자기소개
+  String id = '';
+  String password = '';
+  String email = '';
+  String nickname = '';
 
+  bool btActivation = true;
   bool _idError = false;
   bool _pwError = false;
   bool _emailError = false;
@@ -40,6 +39,7 @@ class SignupVM extends ChangeNotifier {
   void validateIdInput(String value) {
     if (value.length >= 4 && value.length <= 16) {
       _idError = false;
+      btActivation = false;
     } else {
       _idError = true;
     }
@@ -49,6 +49,7 @@ class SignupVM extends ChangeNotifier {
   void validatePwInput(String value) {
     if (value.length >= 6 && value.length <= 20) {
       _pwError = false;
+      btActivation = false;
     } else {
       _pwError = true;
     }
@@ -56,10 +57,11 @@ class SignupVM extends ChangeNotifier {
   }
 
   void validatePwMatch(String value) {
-    if (pwController.text != value) {
-      _pwMatch = true;
-    } else {
+    if (pwController.text == value) {
       _pwMatch = false;
+      btActivation = false;
+    } else {
+      _pwMatch = true;
     }
     notifyListeners();
   }
@@ -67,6 +69,7 @@ class SignupVM extends ChangeNotifier {
   void validateNickNameInput(String value) {
     if (value.length < 9) {
       _nicknameError = false;
+      btActivation = false;
     } else {
       _nicknameError = true;
     }
@@ -83,6 +86,14 @@ class SignupVM extends ChangeNotifier {
     notifyListeners();
   }
 
+  void truebt(btActivation) {
+    if (_idError && _pwError && _pwMatch && _nicknameError == false) {
+      btActivation = false;
+    } else {
+      btActivation = true;
+    }
+  }
+
   bool validateEmail(String value) {
     final RegExp emailRegExp =
         RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
@@ -93,16 +104,16 @@ class SignupVM extends ChangeNotifier {
 
   Future<void> signup(UserModel userModel) async {
     try {
-      // Convert UserModel to JSON
-      Map<String, dynamic> userJson = {
-        "id1": userModel.memberId,
-        "password1!": userModel.password,
-        "valent9": userModel.email,
-        "n1": userModel.nickname,
+      // Convert UserModel to Map
+      Map<String, dynamic> userMap = {
+        "account": userModel.account,
+        "password": userModel.password,
+        "email": userModel.email,
+        "nickname": userModel.nickname,
       };
 
-      // Encode JSON to String
-      String body = json.encode(userJson);
+      // Encode Map to JSON String
+      String signupData = json.encode(userMap);
 
       // Make a POST request to your backend API
       final response = await http.post(
@@ -110,8 +121,10 @@ class SignupVM extends ChangeNotifier {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: body,
+        body: signupData,
       );
+
+      print(userMap);
 
       // 응답 상태 확인
       if (response.statusCode == 200) {

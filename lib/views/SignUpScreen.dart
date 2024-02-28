@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/views/EmailAuthentication.dart';
 import 'package:suwon/views/LoginScreen.dart';
 import 'package:suwon/views/SignUpDoneScreen.dart';
 import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
@@ -71,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
                               hintText: '닉네임 입력',
                               controller: signupViewModel.nicknameController,
                               showErrorText: signupViewModel.nicknameError,
-                              errorText: '이미 사용중인 닉네임 입니다.',
+                              errorText: '8자 이내로 작성해 주세요',
                               onChanged: (value) =>
                                   signupViewModel.validateNickNameInput(value),
                               onPressed: () {},
@@ -114,16 +115,16 @@ class SignUpScreen extends StatelessWidget {
                             CustomButtonWidget(
                                 text: '다음',
                                 color: Colors.white,
-                                backgroundColor: Color(0xFF111111),
-                                onPressed: () {
-                                  signupViewModel.signup;
-                                  Navigator.push(
+                                backgroundColor: signupViewModel.btActivation
+                                    ? Colors.grey
+                                    : Color(0xFF111111),
+                                onPressed: () async {}),
+
+                            /* Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            SignUpDoneScreen()),
-                                  );
-                                }),
+                                        builder: (context) => EmailAuth()),
+                                  );*/
                             SizedBox(
                               height: 14.h,
                             ),

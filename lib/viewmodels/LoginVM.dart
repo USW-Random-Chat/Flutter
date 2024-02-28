@@ -25,7 +25,7 @@ class LoginVM extends ChangeNotifier {
     try {
       final apiUrl = Uri.parse('http://3.35.83.91:8080/member/sign-in');
       final requestBody = {
-        "memberId": _userid,
+        "account": _userid,
         "password": _userpw,
       };
 

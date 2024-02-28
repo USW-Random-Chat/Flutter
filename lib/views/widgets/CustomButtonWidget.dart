@@ -7,6 +7,7 @@ class CustomButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final Border? border;
   final Color color;
+  final bool? isEnabled;
 
   const CustomButtonWidget({
     required this.text,
@@ -14,6 +15,7 @@ class CustomButtonWidget extends StatelessWidget {
     required this.onPressed,
     required this.color,
     this.border,
+    this.isEnabled,
   });
 
   @override
