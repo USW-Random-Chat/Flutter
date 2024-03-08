@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/AccountRecoveryVM.dart';
+import 'package:suwon/viewmodels/ChattingVM.dart';
 import 'package:suwon/viewmodels/LoginVM.dart';
 import 'package:suwon/viewmodels/SignupVM.dart'; // 추가: SignupViewModel 임포트
 import 'package:suwon/views/LoginScreen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => SignupVM()), // 추가: SignupViewModel 제공
         ChangeNotifierProvider(create: (context) => AccountRecoveryVM()),
+        ChangeNotifierProvider(create: (context) => ChatViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

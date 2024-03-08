@@ -1,7 +1,16 @@
-/*import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/models/user_model.dart';
 import 'package:suwon/viewmodels/SignupVM.dart';
 import 'package:provider/provider.dart';
+import 'package:suwon/views/LoginScreen.dart';
+import 'package:suwon/views/SignUpScreen.dart';
+import 'package:suwon/views/widgets/CustomButtonWidget.dart';
+import 'package:suwon/views/widgets/EmailTextFieldWidget.dart';
+import 'package:suwon/views/widgets/SuchatAppBarWidget.dart';
+import 'package:suwon/views/widgets/TextFontWidget.dart';
 
 class EmailAuth extends StatelessWidget {
   const EmailAuth({super.key});
@@ -16,7 +25,6 @@ class EmailAuth extends StatelessWidget {
           body: Container(
             margin: EdgeInsets.only(top: 88.h),
             child: Form(
-              key: _formKey,
               child: Column(
                 children: [
                   Container(
@@ -25,14 +33,10 @@ class EmailAuth extends StatelessWidget {
                     child: SuchatAppBarWidget(
                       text: ' 회원가입',
                       onPressed: () {
-                        signupViewModel.idController.clear();
-                        signupViewModel.pwController.clear();
-                        signupViewModel.pwMatchController.clear();
-                        signupViewModel.emailController.clear();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                            builder: (context) => SignUpScreen(),
                           ),
                         );
                       },
@@ -46,102 +50,74 @@ class EmailAuth extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            IdInputFD(),
-                            SizedBox(height: 44.h),
-                            PwInputFD(
-                              labelText: '비밀번호',
-                              showErrorText: signupViewModel.pwError,
-                              errorText: '* 6자 이상 20자 이내로 작성해 주세요',
-                              obscureText: signupViewModel.passwordVisible1,
-                              controller: signupViewModel.pwController,
-                              onChanged: (value) =>
-                                  signupViewModel.validatePwInput(value),
-                              hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
-                              onPressed: () {
-                                signupViewModel.togglePasswordVisibility1();
-                              },
-                              icon: signupViewModel.passwordVisible1
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                            ),
-                            SizedBox(height: 18.h),
-                            PwInputFD(
-                              labelText: '비밀번호 확인',
-                              showErrorText: signupViewModel.pwMatch,
-                              errorText: '* 비밀번호가 일치하지 않습니다.',
-                              obscureText: signupViewModel.passwordVisible2,
-                              controller: signupViewModel.pwMatchController,
-                              onChanged: (value) =>
-                                  signupViewModel.validatePwMatch(value),
-                              hintText: '비밀번호 입력 (문자, 숫자 포함 6~20자)',
-                              onPressed: () {
-                                signupViewModel.togglePasswordVisibility2();
-                              },
-                              icon: signupViewModel.passwordVisible2
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                            ),
-                            SizedBox(height: 46.h),
+                            SizedBox(height: 35.h),
                             EmailTextFieldWidget(
                                 controller: signupViewModel.emailController,
                                 onChanged: (value) =>
                                     signupViewModel.isEmailValid),
                             SizedBox(height: 57.h),
-                            CustomButtonWidget(
-                                text: '다음',
-                                color: Colors.white,
-                                backgroundColor: Color(0xFF111111),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SignUpDoneScreen()),
-                                  );
-                                }),
-                            SizedBox(
-                              height: 14.h,
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextFontWidget.fontSemiBold(
-                                  text: '회원가입 시 ',
+                                  text: '* 입력하신 메일로 ',
                                   fontSize: 12.sp,
                                   color: Color(0xFF989898),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    // 버튼이 클릭되었을 때 실행될 코드
-                                  },
-                                  child: TextFontWidget.fontSemiBold(
-                                    text: '서비스 이용약관',
-                                    fontSize: 12.sp,
-                                    color: Color(0xFF2D64D8),
-                                  ),
                                 ),
                                 TextFontWidget.fontSemiBold(
-                                  text: ' 및 ',
+                                  text: '이메일 인증 URL ',
+                                  fontSize: 12.sp,
+                                  color: Color(0xff2d63d8),
+                                ),
+                                TextFontWidget.fontSemiBold(
+                                  text: '을 전송합니다',
                                   fontSize: 12.sp,
                                   color: Color(0xFF989898),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    // 버튼이 클릭되었을 때 실행될 코드
-                                  },
-                                  child: TextFontWidget.fontSemiBold(
-                                    text: '개인정보 처리방침',
-                                    fontSize: 12.sp,
-                                    color: Color(0xFF2D64D8),
-                                  ),
                                 ),
                               ],
                             ),
-                            TextFontWidget.fontSemiBold(
-                              text: '하신 것으로 간주됩니다',
-                              fontSize: 12.sp,
-                              color: Color(0xFF989898),
+                            SizedBox(height: 10.h),
+                            CustomButtonWidget(
+                              text: '인증메일 전송',
+                              color: Colors.white,
+                              backgroundColor: Color(0xff2d63d8),
+                              onPressed: () async {
+                                // 사용자 입력을 JSON 형식으로 변환합니다
+                                String jsonData = json.encode({
+                                  "memberId": signupViewModel.idController.text,
+                                  "password": signupViewModel.pwController.text,
+                                  "email": signupViewModel.emailController.text,
+                                  "nickname":
+                                      signupViewModel.nicknameController.text,
+                                });
+
+                                // UserModel.fromJson 생성자를 사용하여 UserModel 객체를 만듭니다
+                                UserModel userModel =
+                                    UserModel.fromJson(json.decode(jsonData));
+
+                                // UserModel 객체와 함께 signup 메서드를 호출합니다
+                                await signupViewModel.signup(userModel);
+                              },
                             ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            CustomButtonWidget(
+                                text: '회원가입 완료',
+                                color: Colors.white,
+                                backgroundColor: Color(0xFF111111),
+                                onPressed: () {
+                                  signupViewModel.idController.clear();
+                                  signupViewModel.pwController.clear();
+                                  signupViewModel.pwMatchController.clear();
+                                  signupViewModel.emailController.clear();
+                                  signupViewModel.nicknameController.clear();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginScreen()),
+                                  );
+                                }),
                           ],
                         ),
                       ),
@@ -154,4 +130,3 @@ class EmailAuth extends StatelessWidget {
     );
   }
 }
-*/

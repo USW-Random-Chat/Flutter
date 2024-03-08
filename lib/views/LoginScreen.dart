@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/ChangePasswordScreen.dart';
@@ -7,6 +9,7 @@ import 'package:suwon/views/SignUpScreen.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/LoginVM.dart';
+import 'package:suwon/views/widgets/NormalAlertDialogWidget.dart';
 import 'package:suwon/views/widgets/TextFontWidget.dart';
 
 import 'SearchPasswordScreen.dart';
@@ -71,6 +74,12 @@ class LoginScreen extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen()),
                           );
+                        } else {
+                          NormalAlertDialogWidget(
+                                  title: '알림',
+                                  message: 'ID 혹은 비밀번호가 올바르지 않습니다.',
+                                  onClose: () {})
+                              .show(context);
                         }
                       }),
                   Row(
