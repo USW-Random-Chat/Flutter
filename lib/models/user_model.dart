@@ -1,11 +1,9 @@
 class UserModel {
-  final String id;
-  final String password;
-  final String email;
+  final String account, password, email, nickname;
 
-  UserModel({
-    required this.id,
-    required this.password,
-    required this.email,
-  });
+  UserModel.fromJson(Map<String, dynamic> json)
+      : account = json["account"],
+        password = json["password"],
+        email = json["email"],
+        nickname = json["nickname"];
 }
