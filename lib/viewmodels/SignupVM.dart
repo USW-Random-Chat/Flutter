@@ -139,4 +139,39 @@ class SignupVM extends ChangeNotifier {
       print('Signup failed: $error');
     }
   }
+
+  //id 중복체크
+  Future<void> idcheck(UserModel userModel) async {
+    try {
+      // Convert UserModel to Map
+      Map<String, dynamic> userMap = {
+        "account": userModel.account,
+      };
+      // Encode Map to JSON String
+      String signupData = json.encode(userMap);
+
+      // Make a POST request to your backend API
+      final response = await http.post(
+        Uri.parse("http://43.202.91.160:8080/member/check-duplicate-id-signUp"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: signupData,
+      );
+
+      print(userMap);
+
+      // 응답 상태 확인
+      if (response.statusCode == 200) {
+        // 회원가입 성공 시, 필요한 경우 응답을 처리
+        print('사용 가능한 닉네임입니다.');
+      } else {
+        // 회원가입 실패 시, 에러 처리
+        print('이미 존재하는 닉네임 입니다. - ${response.statusCode}: ${response.body}');
+      }
+    } catch (error) {
+      // 회원가입 과정에서 발생하는 에러 처리
+      print('idcheck: $error');
+    }
+  }
 }
