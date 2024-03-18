@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,12 +16,31 @@ class RandomChat extends StatefulWidget {
 
 class _RandomChatState extends State<RandomChat> {
   late ChatViewModel viewModel;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     viewModel = Provider.of<ChatViewModel>(context, listen: false);
     viewModel.initialize();
+
+    viewModel.addListener(_scrollToEnd); // 새 메시지 추가 시 스크롤
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // 리소스 해제
+    super.dispose();
+  }
+
+  void _scrollToEnd() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
@@ -34,13 +55,13 @@ class _RandomChatState extends State<RandomChat> {
             children: [
               _Header(),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: viewModel.chatMessages
-                        .map(
-                            (message) => _ChatBubble(message: message.contents))
-                        .toList(),
-                  ),
+                child: ListView.builder(
+                  controller: _scrollController,
+                  itemCount: viewModel.chatMessages.length,
+                  itemBuilder: (context, index) {
+                    final message = viewModel.chatMessages[index];
+                    return _ChatBubble(message: message.contents);
+                  },
                 ),
               ),
               Container(
@@ -136,7 +157,7 @@ class _Header extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 95.w),
+          SizedBox(width: 130.w),
           GestureDetector(
             child: SvgPicture.asset(
               'assets/Report button.svg',
@@ -180,7 +201,7 @@ class _ChatBubble extends StatelessWidget {
       ),
       child: Text(
         message,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
       ),
     );
   }

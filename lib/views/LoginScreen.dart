@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/ChangePasswordScreen.dart';
+import 'package:suwon/views/ChattingScreen.dart';
 import 'package:suwon/views/SearchIdScreen.dart';
 import 'package:suwon/views/HomeScreen.dart';
 import 'package:suwon/views/SignUpScreen.dart';
@@ -104,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SearchPasswordScreen()),
+                                  builder: (context) => RandomChat()),
                             );
                           },
                           child: TextFontWidget.fontRegular(

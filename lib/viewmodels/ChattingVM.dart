@@ -7,7 +7,7 @@ import 'package:suwon/models/chat_model.dart';
 
 class ChatViewModel extends ChangeNotifier {
   StompClient? client;
-  String serverUrl = 'ws://3.35.83.91:8080/stomp';
+  String serverUrl = 'ws://43.202.91.160:8080/stomp';
   String sendEndpoint = '/pub/chat/message/1234';
   List<Message> chatMessages = [];
 
@@ -33,7 +33,7 @@ class ChatViewModel extends ChangeNotifier {
           Map<String, dynamic> jsonData = json.decode(frame.body!);
           Message message = Message.fromJson(jsonData);
           chatMessages.add(message);
-          notifyListeners(); // 새로운 메시지가 추가될 때마다 호출
+          notifyListeners(); // 수정된 부분: 새로운 메시지가 추가될 때마다 화면을 업데이트
         }
       },
     );
@@ -46,5 +46,8 @@ class ChatViewModel extends ChangeNotifier {
           Message(roomId: '1234', sender: 'your_name', contents: message)
               .toJson()),
     );
+
+    print(message);
+    notifyListeners();
   }
 }
