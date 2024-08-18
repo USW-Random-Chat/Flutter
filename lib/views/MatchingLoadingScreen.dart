@@ -1,9 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:stomp_dart_client/stomp_dart_client.dart';
+import 'package:suwon/viewmodels/MatchingVM.dart';
 import 'package:suwon/views/ChattingScreen.dart';
 import 'package:suwon/views/HomeScreen.dart';
+import 'package:suwon/views/chat_test.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 
 class MatchingLoadingScreen extends StatefulWidget {
@@ -14,18 +17,65 @@ class MatchingLoadingScreen extends StatefulWidget {
 }
 
 class _MatchingLoadingState extends State<MatchingLoadingScreen> {
+  final MatchingViewModel _matchingViewModel = MatchingViewModel();
   StreamController<int> dotStreamController = StreamController<int>();
   int numDots = 0;
+  StompClient? _stompClient;
 
   @override
   void initState() {
     super.initState();
+    connectStomp(); // STOMP 통신 시작
     _startAnimation();
+    _startMatching(); // 매칭 시작
+  }
+
+  void connectStomp() {
+    _stompClient = StompClient(
+      config: StompConfig(
+        url: 'ws://43.202.91.160:8080/stomp',
+        onConnect: (StompFrame frame) {
+          print('STOMP connected');
+        },
+        onWebSocketError: (dynamic error) => print('STOMP error: $error'),
+      ),
+    );
+    _stompClient?.activate();
+  }
+
+  void _startMatching() async {
+    String account = 'admin';
+
+    // MatchingViewModel 인스턴스를 가져옵니다.
+    final matchingViewModel =
+        Provider.of<MatchingViewModel>(context, listen: false);
+
+    // 매칭 요청을 보냅니다.
+    matchingViewModel.requestMatch(account);
+
+    // 매칭 결과를 구독합니다.
+    matchingViewModel.addListener(() {
+      if (matchingViewModel.isMatched) {
+        // 매칭이 완료되었을 때, 채팅 화면으로 이동합니다.
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => ChatScreen()),
+          (Route<dynamic> route) => false,
+        );
+      } else if (!matchingViewModel.isMatching) {
+        // 매칭이 취소되거나 실패했을 때, 알림을 표시합니다.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('매칭이 취소되었거나 실패했습니다.')),
+        );
+      }
+    });
   }
 
   @override
   void dispose() {
     dotStreamController.close();
+    _matchingViewModel.dispose();
+    _stompClient?.deactivate(); // STOMP 연결 해제
     super.dispose();
   }
 
@@ -94,9 +144,10 @@ class _MatchingLoadingState extends State<MatchingLoadingScreen> {
                 text: '매칭 중단하기',
                 backgroundColor: Color(0xff111111),
                 onPressed: () {
+                  _matchingViewModel.cancelMatch('admin');
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => RandomChat()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
                 color: Color(0xffFFFFFF),

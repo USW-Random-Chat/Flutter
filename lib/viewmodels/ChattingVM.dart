@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stomp_dart_client/stomp.dart';
-import 'package:stomp_dart_client/stomp_config.dart';
-import 'package:stomp_dart_client/stomp_frame.dart';
+import 'package:stomp_dart_client/stomp_dart_client.dart';
+
 import 'dart:convert';
 import 'package:suwon/models/chat_model.dart';
 
@@ -48,6 +47,5 @@ class ChatViewModel extends ChangeNotifier {
     );
 
     print(message);
-    notifyListeners();
   }
 }

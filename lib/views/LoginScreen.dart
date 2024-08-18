@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:suwon/views/ChangePasswordScreen.dart';
+import 'package:suwon/views/SearchIDEmailAuth.dart';
 import 'package:suwon/views/ChattingScreen.dart';
-import 'package:suwon/views/SearchIdScreen.dart';
+
 import 'package:suwon/views/HomeScreen.dart';
 import 'package:suwon/views/SignUpScreen.dart';
+import 'package:suwon/views/chat_test.dart';
 import 'package:suwon/views/widgets/CustomButtonWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:suwon/viewmodels/LoginVM.dart';
@@ -91,7 +93,8 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SearchIdScreen()),
+                                  //builder: (context) => ChatScreen()),
+                                  builder: (context) => IdSearchScreen()),
                             );
                           },
                           child: TextFontWidget.fontRegular(
@@ -105,7 +108,8 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RandomChat()),
+                                  //builder: (context) => ChatScreen()),
+                                  builder: (context) => SearchPasswordScreen()),
                             );
                           },
                           child: TextFontWidget.fontRegular(

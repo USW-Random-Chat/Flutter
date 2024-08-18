@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:suwon/models/user_model.dart';
 import 'package:suwon/views/EmailAuthentication.dart';
 import 'package:suwon/views/LoginScreen.dart';
 import 'package:suwon/views/SignUpDoneScreen.dart';
@@ -34,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                     child: SuchatAppBarWidget(
                       text: ' 회원가입',
                       onPressed: () {
-                        signupViewModel.idController.clear();
+                        signupViewModel.accountController.clear();
                         signupViewModel.pwController.clear();
                         signupViewModel.pwMatchController.clear();
                         signupViewModel.emailController.clear();
@@ -59,12 +60,19 @@ class SignUpScreen extends StatelessWidget {
                             IdInputFD(
                               labelText: '아이디',
                               hintText: '아이디 입력 (4~16자)',
-                              controller: signupViewModel.idController,
-                              showErrorText: signupViewModel.idError,
-                              errorText: '* 4자 이상 16자 이내로 작성해 주세요',
+                              controller: signupViewModel.accountController,
+                              showErrorText: signupViewModel.idError ||
+                                  signupViewModel.idDuplicate,
+                              errorText: signupViewModel.idError
+                                  ? '* 4자 이상 16자 이내로 작성해 주세요'
+                                  : (signupViewModel.idDuplicate
+                                      ? '이미 사용중인 아이디 입니다.'
+                                      : '사용 가능한 아이디 입니다.'),
                               onChanged: (value) =>
                                   signupViewModel.validateIdInput(value),
-                              onPressed: () {},
+                              onPressed: () {
+                                signupViewModel.idcheck();
+                              },
                             ),
                             SizedBox(height: 40.h),
                             IdInputFD(
@@ -75,7 +83,9 @@ class SignUpScreen extends StatelessWidget {
                               errorText: '8자 이내로 작성해 주세요',
                               onChanged: (value) =>
                                   signupViewModel.validateNickNameInput(value),
-                              onPressed: () {},
+                              onPressed: () {
+                                signupViewModel.nicknamecheck();
+                              },
                             ),
                             SizedBox(height: 40.h),
                             PwInputFD(
@@ -118,13 +128,13 @@ class SignUpScreen extends StatelessWidget {
                                 backgroundColor: signupViewModel.btActivation
                                     ? Colors.grey
                                     : Color(0xFF111111),
-                                onPressed: () async {}),
-
-                            /* Navigator.push(
+                                onPressed: () async {
+                                  Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => EmailAuth()),
-                                  );*/
+                                  );
+                                }),
                             SizedBox(
                               height: 14.h,
                             ),
@@ -181,7 +191,7 @@ class SignUpScreen extends StatelessWidget {
   }
 }
 
-class IdInputFD extends StatelessWidget {
+class IdInputFD extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller;
@@ -212,7 +222,6 @@ class IdInputFD extends StatelessWidget {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -271,6 +280,12 @@ class IdInputFD extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 

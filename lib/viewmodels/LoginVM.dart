@@ -23,7 +23,7 @@ class LoginVM extends ChangeNotifier {
 
   Future<void> login() async {
     try {
-      final apiUrl = Uri.parse('http://43.202.91.160:8080/member/sign-in');
+      final apiUrl = Uri.parse('http://43.202.91.160:8080/open/member/sign-in');
       final requestBody = {
         "account": _userid,
         "password": _userpw,

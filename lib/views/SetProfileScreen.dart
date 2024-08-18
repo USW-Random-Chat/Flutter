@@ -29,7 +29,7 @@ class SetProfileScreen extends StatelessWidget {
                     child: SuchatAppBarWidget(
                       text: ' 프로필 설정',
                       onPressed: () {
-                        signupViewModel.idController.clear();
+                        signupViewModel.accountController.clear();
                         signupViewModel.pwController.clear();
                         Navigator.push(
                           context,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:suwon/viewmodels/MatchingVM.dart';
 import 'package:suwon/views/CustomDrawerScreen.dart';
 import 'package:suwon/views/MatchingLoadingScreen.dart';
 
@@ -105,7 +106,15 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     child: CustomButton_main(
                       text: '매칭 시작하기',
-                      onPressed: () {
+                      onPressed: () async {
+                        // onPressed를 비동기 함수로 만듦
+                        MatchingViewModel viewModel = MatchingViewModel();
+                        String accessToken = 'YourAccessTokenHere';
+
+                        ;
+                        // 매칭 시작 함수 호출
+
+                        // 매칭 로딩 화면으로 네비게이션
                         Navigator.push(
                           context,
                           MaterialPageRoute(

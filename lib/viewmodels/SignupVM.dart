@@ -4,10 +4,12 @@ import 'package:suwon/models/user_model.dart';
 import 'dart:convert';
 
 class SignupVM extends ChangeNotifier {
-  String id = '';
+  String account = '';
   String password = '';
   String email = '';
   String nickname = '';
+  String errormesage = '';
+  int errorcode = 0;
 
   bool btActivation = true;
   bool _idError = false;
@@ -16,8 +18,9 @@ class SignupVM extends ChangeNotifier {
   bool _pwMatch = false;
   bool _isEmailValid = true;
   bool _nicknameError = false;
+  bool _idDuplicate = false;
 
-  TextEditingController idController = TextEditingController();
+  TextEditingController accountController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController pwMatchController = TextEditingController();
@@ -26,6 +29,7 @@ class SignupVM extends ChangeNotifier {
   TextEditingController selfController = TextEditingController();
 
   bool get idError => _idError;
+  bool get idDuplicate => _idDuplicate;
   bool get pwError => _pwError;
   bool get emailError => _emailError;
   bool get pwMatch => _pwMatch;
@@ -37,9 +41,16 @@ class SignupVM extends ChangeNotifier {
   bool get nicknameError => _nicknameError;
 
   void validateIdInput(String value) {
+    account = value;
     if (value.length >= 4 && value.length <= 16) {
       _idError = false;
       btActivation = false;
+    } else if (errorcode == 200) {
+      _idDuplicate = false;
+      errormesage = '사용가능한 아이디 입니다.';
+    } else if (errorcode == 500) {
+      _idDuplicate = true;
+      errormesage = '이미 사용중인 아이디 입니다.';
     } else {
       _idError = true;
     }
@@ -67,6 +78,7 @@ class SignupVM extends ChangeNotifier {
   }
 
   void validateNickNameInput(String value) {
+    nickname = value;
     if (value.length < 9) {
       _nicknameError = false;
       btActivation = false;
@@ -141,18 +153,19 @@ class SignupVM extends ChangeNotifier {
   }
 
   //id 중복체크
-  Future<void> idcheck(UserModel userModel) async {
+  Future<void> idcheck() async {
     try {
       // Convert UserModel to Map
       Map<String, dynamic> userMap = {
-        "account": userModel.account,
+        "account": account,
       };
       // Encode Map to JSON String
       String signupData = json.encode(userMap);
 
       // Make a POST request to your backend API
       final response = await http.post(
-        Uri.parse("http://43.202.91.160:8080/member/check-duplicate-id-signUp"),
+        Uri.parse(
+            "http://43.202.91.160:8080/open/member/check-duplicate-account"),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -164,14 +177,52 @@ class SignupVM extends ChangeNotifier {
       // 응답 상태 확인
       if (response.statusCode == 200) {
         // 회원가입 성공 시, 필요한 경우 응답을 처리
-        print('사용 가능한 닉네임입니다.');
-      } else {
+        print('사용 가능한 아이디 입니다.');
+      } else if (response.statusCode == 500) {
         // 회원가입 실패 시, 에러 처리
-        print('이미 존재하는 닉네임 입니다. - ${response.statusCode}: ${response.body}');
+        errorcode = 500;
+        print('이미 존재하는 아이디 입니다. - ${response.statusCode}: ${response.body}');
       }
     } catch (error) {
       // 회원가입 과정에서 발생하는 에러 처리
       print('idcheck: $error');
+    }
+  }
+
+  //nickname 중복체크
+  Future<void> nicknamecheck() async {
+    try {
+      // Convert UserModel to Map
+      Map<String, dynamic> userMap = {
+        "nickname": nickname,
+      };
+      // Encode Map to JSON String
+      String signupData = json.encode(userMap);
+
+      // Make a POST request to your backend API
+      final response = await http.post(
+        Uri.parse(
+            "http://43.202.91.160:8080/open/member/check-duplicate-nickname-signUp"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: signupData,
+      );
+
+      print(userMap);
+
+      // 응답 상태 확인
+      if (response.statusCode == 200) {
+        // 회원가입 성공 시, 필요한 경우 응답을 처리
+        print('사용 가능한 닉네임 입니다.');
+      } else {
+        // 회원가입 실패 시, 에러 처리
+
+        print('이미 존재하는 닉네임 입니다. - ${response.statusCode}: ${response.body}');
+      }
+    } catch (error) {
+      // 회원가입 과정에서 발생하는 에러 처리
+      print('nicknamecheck: $error');
     }
   }
 }

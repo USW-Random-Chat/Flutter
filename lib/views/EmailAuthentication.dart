@@ -84,7 +84,8 @@ class EmailAuth extends StatelessWidget {
                               onPressed: () async {
                                 // 사용자 입력을 JSON 형식으로 변환합니다
                                 String jsonData = json.encode({
-                                  "memberId": signupViewModel.idController.text,
+                                  "memberId":
+                                      signupViewModel.accountController.text,
                                   "password": signupViewModel.pwController.text,
                                   "email": signupViewModel.emailController.text,
                                   "nickname":
@@ -107,7 +108,7 @@ class EmailAuth extends StatelessWidget {
                                 color: Colors.white,
                                 backgroundColor: Color(0xFF111111),
                                 onPressed: () {
-                                  signupViewModel.idController.clear();
+                                  signupViewModel.accountController.clear();
                                   signupViewModel.pwController.clear();
                                   signupViewModel.pwMatchController.clear();
                                   signupViewModel.emailController.clear();
